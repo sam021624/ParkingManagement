@@ -20,6 +20,8 @@ public class Main extends JFrame {
 
 		//this is a comment, should be viewed in my computer
 		
+		//this should also be seen in laptop
+		
 		this.setTitle("Parking Management System");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
