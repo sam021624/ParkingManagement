@@ -8,22 +8,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 
 import history.History;
 
@@ -203,7 +191,7 @@ public class MainPanel extends JPanel {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) {
 				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
-															"Confirmation", JOptionPane.YES_NO_OPTION);
+						"Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if (choice == JOptionPane.YES_OPTION) {
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -215,7 +203,7 @@ public class MainPanel extends JPanel {
 
 					release(slotID);
 
-					if(isTableFilled(table)) {
+					if (isTableFilled(table)) {
 						isTableFilled(table);
 						model.removeRow(selectedRow);
 					}
@@ -334,7 +322,7 @@ public class MainPanel extends JPanel {
 					return false;
 				} else {
 					sendData(table);
-					//int selectedRow = table.getSelectedRow();
+					// int selectedRow = table.getSelectedRow();
 				}
 			}
 		}
@@ -345,6 +333,6 @@ public class MainPanel extends JPanel {
 	private void sendData(JTable table) {
 		DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
 		main.updateTableData(sourceModel);
-		
+
 	}
 }

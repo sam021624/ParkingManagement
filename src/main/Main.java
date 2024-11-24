@@ -31,15 +31,15 @@ public class Main extends JFrame {
 	public void updateInfo(String category, String studentName, String plateNumber) {
 		mainPanel.updateFields(category, studentName, plateNumber);
 	}
-	
+
 	public void updateTableData(DefaultTableModel sourceModel) {
 		historyPanel.updateTableData(sourceModel);
 	}
-	
+
 	public void setOccupiedStatus(String occupied) {
 		mainPanel.occupied(occupied);
 	}
-	
+
 	public void releaseCar(String slotID) {
 		gateParkingLayout.releaseCar(slotID);
 	}

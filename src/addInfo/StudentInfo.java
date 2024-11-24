@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class StudentInfo extends JFrame{
 	Methods methods = new Methods();
@@ -33,60 +35,78 @@ public class StudentInfo extends JFrame{
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(56,170,149));
-		panel.setBounds(0, 0, 686, 561);
+		panel.setBounds(10, 10, 473, 588);
 		getContentPane().add(panel);
+		
+		JLabel categoryLabel = new JLabel("Category");
+		categoryLabel.setForeground(Color.WHITE);
+		categoryLabel.setFont(new Font("Cambria Math", Font.PLAIN, 25));
+		categoryLabel.setBounds(248, 231, 196, 51);
+		panel.add(categoryLabel);
+		
+		JComboBox<String> comboBoxCategory = new JComboBox<>();
+		comboBoxCategory.setBounds(248, 280, 200, 43);
+		panel.add(comboBoxCategory);
+		comboBoxCategory.addItem("Student");
+		comboBoxCategory.addItem("Teacher");
 		
 		JLabel lblStudentNumber = new JLabel("Student Number");
 		lblStudentNumber.setFont(new Font("Cambria Math", Font.PLAIN, 25));
 		lblStudentNumber.setForeground(new Color(255, 255, 255));
-		lblStudentNumber.setBounds(198, 45, 467, 51);
+		lblStudentNumber.setBounds(26, 230, 202, 51);
 		panel.add(lblStudentNumber);
 		
 		idTextField = new JTextField();
 		idTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		idTextField.setBounds(198, 95, 325, 43);
+		idTextField.setBounds(26, 280, 200, 43);
 		panel.add(idTextField);
 		idTextField.setColumns(10);
 		
 		JLabel lblFirstName = new JLabel("First Name");
 		lblFirstName.setForeground(Color.WHITE);
 		lblFirstName.setFont(new Font("Cambria Math", Font.PLAIN, 25));
-		lblFirstName.setBounds(198, 149, 467, 51);
+		lblFirstName.setBounds(26, 125, 202, 51);
 		panel.add(lblFirstName);
 		
 		firstnameTextField = new JTextField();
 		firstnameTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		firstnameTextField.setColumns(10);
-		firstnameTextField.setBounds(198, 200, 325, 43);
+		firstnameTextField.setBounds(26, 175, 200, 43);
 		panel.add(firstnameTextField);
 		
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setForeground(Color.WHITE);
 		lblLastName.setFont(new Font("Cambria Math", Font.PLAIN, 25));
-		lblLastName.setBounds(198, 254, 467, 51);
+		lblLastName.setBounds(248, 125, 196, 51);
 		panel.add(lblLastName);
 		
 		lastnameTextField = new JTextField();
 		lastnameTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lastnameTextField.setColumns(10);
-		lastnameTextField.setBounds(198, 304, 325, 43);
+		lastnameTextField.setBounds(248, 175, 200, 43);
 		panel.add(lastnameTextField);
 		
 		JLabel lblPlateNumber = new JLabel("Plate Number");
 		lblPlateNumber.setForeground(Color.WHITE);
 		lblPlateNumber.setFont(new Font("Cambria Math", Font.PLAIN, 25));
-		lblPlateNumber.setBounds(198, 358, 467, 51);
+		lblPlateNumber.setBounds(26, 333, 325, 51);
 		panel.add(lblPlateNumber);
 		
 		platenumberTextField = new JTextField();
 		platenumberTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		platenumberTextField.setColumns(10);
-		platenumberTextField.setBounds(198, 410, 325, 43);
+		platenumberTextField.setBounds(26, 385, 202, 43);
 		panel.add(platenumberTextField);
 		
 		JButton btnSubmit = new JButton("Submit!");
-		btnSubmit.setBounds(198, 469, 123, 51);
+		btnSubmit.setBounds(26, 444, 422, 51);
 		panel.add(btnSubmit);
+		
+		JLabel lblNewLabel = new JLabel("Registration");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(0, 29, 473, 72);
+		panel.add(lblNewLabel);
 		btnSubmit.addActionListener(e -> {
 			if(idTextField.getText().isEmpty() || firstnameTextField.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Fill in the Blanks");
@@ -99,12 +119,8 @@ public class StudentInfo extends JFrame{
 			
 		});
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(400, 469, 123, 51);
-		panel.add(btnBack);
-		
 		this.setTitle("Registration");
-		this.setSize(701,600);
+		this.setSize(507,645);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
