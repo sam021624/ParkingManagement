@@ -1,21 +1,31 @@
 package main;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -23,6 +33,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -110,11 +122,49 @@ public class MainPanel extends JPanel {
 		lblID.setBounds(10, 51, 135, 37);
 		pnlParking.add(lblID);
 
+		JPopupMenu suggestionsMenu = new JPopupMenu();
+		
 		IDtextField = new JTextField();
 		IDtextField.setText("");
 		IDtextField.setColumns(10);
 		IDtextField.setBounds(155, 55, 159, 29);
 		pnlParking.add(IDtextField);
+		IDtextField.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				fetchSuggestions();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				fetchSuggestions();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				fetchSuggestions();
+			}
+
+            private void fetchSuggestions() {
+                String input = IDtextField.getText().trim();
+                if (input.isEmpty()) {
+                    suggestionsMenu.setVisible(false);
+                    return;
+                }
+                List<String> suggestions = getSuggestionsFromDatabase(input);
+
+                suggestionsMenu.removeAll();
+                for (String suggestion : suggestions) {
+                    JMenuItem item = new JMenuItem(suggestion);
+                    item.addActionListener(event -> {
+                    	IDtextField.setText(suggestion);
+                        suggestionsMenu.setVisible(false);
+                    });
+                    suggestionsMenu.add(item);
+                }
+                suggestionsMenu.show(IDtextField, 0, IDtextField.getHeight());
+            }
+        });
 
 		JButton btnSearch = new JButton(searchIcon);
 		btnSearch.setBounds(320, 51, 41, 37);
@@ -383,5 +433,39 @@ public class MainPanel extends JPanel {
 	    
 	    main.updateTableData(rowData);
 	}
+	
+	private static List<String> getSuggestionsFromDatabase(String input) {
+	    List<String> suggestions = new ArrayList<>();
+	    String url = "jdbc:mysql://localhost:3306/studentdatabase";
+	    String user = "root";
+	    String password = "root";
+
+	    // Updated query with LPAD for leading zeros
+	    String query = "SELECT LPAD(student_id, 11, '0') AS padded_student_id " +
+	                   "FROM studentInfo " +
+	                   "WHERE LPAD(student_id, 11, '0') LIKE CONCAT(?, '%') " +
+	                   "LIMIT 10";
+
+	    try (Connection connection = DriverManager.getConnection(url, user, password);
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+	        preparedStatement.setString(1, input); // Use user input directly
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            suggestions.add(resultSet.getString("padded_student_id")); // Fetch padded ID
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(),
+	                "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+
+	    return suggestions;
+	}
+
+
+
 
 }
