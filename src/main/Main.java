@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.JFrame;
 
-
 import helpPanel.HelpPanel;
 import history.History;
 import parkingpanel.CourtParkingLayout;
@@ -19,6 +18,8 @@ public class Main extends JFrame {
 	public Main() {
 		getContentPane().add(mainPanel);
 
+		//this is a comment, should be viewed in my computer
+		
 		this.setTitle("Parking Management System");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
