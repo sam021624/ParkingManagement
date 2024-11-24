@@ -7,7 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import main.Main;
 import main.Methods;
@@ -16,6 +19,7 @@ import java.awt.Font;
 
 public class History extends JPanel {
     private JTable table;
+    private DefaultTableModel targetModel;
 
 	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
 	
@@ -40,11 +44,17 @@ public class History extends JPanel {
         scrollPane.setBounds(10, 95, 966, 457);
         add(scrollPane);
         
-        table = new JTable();
-        table.setModel(new DefaultTableModel(
-            new Object[][] {},
-            new String[] { "License Plate", "Occupied", "Time Parked", "Time Released" }
-        ));
+        String[] columnNames = {"License Plate", "Occupied", "Time Parked", "Time Released"};
+        targetModel = new DefaultTableModel(null, columnNames);
+        table = new JTable(targetModel);
+        
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			TableColumn column = table.getColumnModel().getColumn(i);
+			column.setCellRenderer(centerRenderer);
+		}
+        
         scrollPane.setViewportView(table);
         
         JLabel lblNewLabel = new JLabel("PARKING HISTORY");
@@ -54,62 +64,16 @@ public class History extends JPanel {
         
 
     }
-
-    // Utility method to check if a specific row is fully filled
-    public static boolean isRowFilled(JTable table, int rowIndex) {
-        int columnCount = table.getColumnCount();
-        for (int col = 0; col < columnCount; col++) {
-            Object cellValue = table.getValueAt(rowIndex, col);
-            if (cellValue == null || cellValue.toString().trim().isEmpty()) {
-                return false; 
-            }
-        }
-        return true;
+    
+    public void updateTableData(DefaultTableModel sourceModel) {
+    	targetModel.setRowCount(0);
+    	for (int row = 0; row < sourceModel.getRowCount(); row++) {
+    		Object[] rowData = new Object[sourceModel.getColumnCount()];
+    		for (int col = 0; col < sourceModel.getColumnCount(); col++) {
+    			rowData[col] = sourceModel.getValueAt(row, col);
+    		}
+    		targetModel.addRow(rowData);
+    	}
     }
 
-    // Utility method to check if all rows in the table are fully filled
-    public static boolean areAllRowsFilled(JTable table) {
-        int rowCount = table.getRowCount();
-        for (int row = 0; row < rowCount; row++) {
-            if (!isRowFilled(table, row)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Utility method to transfer data from one table to another
-    public void transferTableData(JTable sourceTable) {
-        DefaultTableModel sourceModel = (DefaultTableModel) sourceTable.getModel();
-        DefaultTableModel targetModel = (DefaultTableModel) table.getModel();
-        
-        // Clear target table before transferring data
-        targetModel.setRowCount(0);
-
-        int rowCount = sourceModel.getRowCount();
-        int columnCount = sourceModel.getColumnCount();
-
-        for (int row = 0; row < rowCount; row++) {
-            Object[] rowData = new Object[columnCount];
-            for (int col = 0; col < columnCount; col++) {
-                rowData[col] = sourceModel.getValueAt(row, col);
-            }
-            targetModel.addRow(rowData);
-        }
-    }
-
-    // Optional: method to directly access the History table from other classes
-    public JTable getTable() {
-        return table;
-    }
-
-    // Example method to check and transfer data
-    public void checkAndTransferData(JTable sourceTable) {
-        if (areAllRowsFilled(sourceTable)) {
-            transferTableData(sourceTable);
-            System.out.println("Data transferred to History table.");
-        } else {
-            System.out.println("Not all rows are filled in the source table.");
-        }
-    }
 }

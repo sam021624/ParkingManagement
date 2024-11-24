@@ -41,16 +41,6 @@ public class StudentInfo extends JFrame{
 		lblStudentNumber.setForeground(new Color(255, 255, 255));
 		lblStudentNumber.setBounds(198, 45, 467, 51);
 		panel.add(lblStudentNumber);
-/*		lblStudentNumber.addKeyListener(new KeyAdapter() { // to do validation
-		    @Override
-		    public void keyTyped(KeyEvent e) {
-		        char c = e.getKeyChar();
-		        // Allow only digits and control keys like backspace
-		        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-		            e.consume(); // Ignore non-numeric input
-		        }
-		    }
-		});*/
 		
 		idTextField = new JTextField();
 		idTextField.setFont(new Font("Tahoma", Font.PLAIN, 15));

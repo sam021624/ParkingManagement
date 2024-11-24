@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 import helpPanel.HelpPanel;
 import history.History;
@@ -29,6 +30,10 @@ public class Main extends JFrame {
 
 	public void updateInfo(String category, String studentName, String plateNumber) {
 		mainPanel.updateFields(category, studentName, plateNumber);
+	}
+	
+	public void updateTableData(DefaultTableModel sourceModel) {
+		historyPanel.updateTableData(sourceModel);
 	}
 	
 	public void setOccupiedStatus(String occupied) {

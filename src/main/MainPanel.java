@@ -1,25 +1,40 @@
 package main;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+import history.History;
 
 public class MainPanel extends JPanel {
 	Main main;
 	Methods methods = new Methods();
-	
+
 	ImageIcon stiIcon = new ImageIcon((getClass().getResource("/stiLogo.png")));
 	ImageIcon searchIcon = new ImageIcon((getClass().getResource("/search.png")));
 	ImageIcon helpIcon = new ImageIcon((getClass().getResource("/help.png")));
-	
+
 	private JTable table;
 	private JTextField nameTextField;
 	private JTextField plateTextField;
@@ -33,7 +48,7 @@ public class MainPanel extends JPanel {
 
 	public MainPanel(Main frame) {
 		this.main = frame;
-		
+
 		this.setBackground(Color.yellow);
 		this.setBounds(0, 0, 986, 563);
 		setLayout(null);
@@ -120,10 +135,10 @@ public class MainPanel extends JPanel {
 		comboBoxCategory.addItem("Visitor");
 		comboBoxCategory.setSelectedIndex(-1);
 		pnlParking.add(comboBoxCategory);
-		if(comboBoxCategory.getSelectedIndex() == 2) {
+		if (comboBoxCategory.getSelectedIndex() == 2) {
 			IDtextField.setEditable(false);
 			IDtextField.setFocusable(false);
-		} else 
+		} else
 			IDtextField.setEditable(true);
 
 		JPanel pnlCars = new JPanel();
@@ -144,13 +159,13 @@ public class MainPanel extends JPanel {
 		};
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
-		
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            TableColumn column = table.getColumnModel().getColumn(i);
-            column.setCellRenderer(centerRenderer);
-        }
+
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			TableColumn column = table.getColumnModel().getColumn(i);
+			column.setCellRenderer(centerRenderer);
+		}
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 24, 384, 287);
@@ -166,7 +181,7 @@ public class MainPanel extends JPanel {
 
 		JButton btnMap = new JButton("🌐 Map");
 		btnMap.setFocusable(false);
-		btnMap.setBounds(40, 124, 95, 35);
+		btnMap.setBounds(38, 124, 103, 35);
 		pnlOperation.add(btnMap);
 		btnMap.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.gateParkingLayout);
@@ -174,7 +189,7 @@ public class MainPanel extends JPanel {
 
 		JButton btnHistory = new JButton("📜 History");
 		btnHistory.setFocusable(false);
-		btnHistory.setBounds(40, 170, 95, 35);
+		btnHistory.setBounds(38, 170, 103, 35);
 		pnlOperation.add(btnHistory);
 		btnHistory.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.historyPanel);
@@ -182,23 +197,28 @@ public class MainPanel extends JPanel {
 
 		JButton btnRelease = new JButton("❌ Release");
 		btnRelease.setFocusable(false);
-		btnRelease.setBounds(40, 81, 95, 35);
+		btnRelease.setBounds(38, 81, 103, 35);
 		pnlOperation.add(btnRelease);
 		btnRelease.addActionListener(e -> {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) {
 				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
-														   "Confirmation", JOptionPane.YES_NO_OPTION);
+															"Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if (choice == JOptionPane.YES_OPTION) {
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
 					model.setValueAt(getCurrentTime(), selectedRow, 3);
-					
+
 					Object value = table.getValueAt(selectedRow, 1);
-					
+
 					String slotID = value.toString();
-					
+
 					release(slotID);
+
+					if(isTableFilled(table)) {
+						isTableFilled(table);
+						model.removeRow(selectedRow);
+					}
 				}
 
 			}
@@ -206,24 +226,22 @@ public class MainPanel extends JPanel {
 
 		JButton btnPark = new JButton("🚗 Park");
 		btnPark.setFocusable(false);
-		btnPark.setBounds(40, 35, 95, 35);
+		btnPark.setBounds(38, 35, 103, 35);
 		pnlOperation.add(btnPark);
 		btnPark.addActionListener(e -> {
-		    if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
-		        String license = getPlateNumber();
-		        int newRow = tableModel.getRowCount(); 
-		        
-		        tableModel.addRow(new Object[] { license, null, getCurrentTime(), null });
-		        
-		        methods.switchPanel(frame, this, frame.gateParkingLayout);
-		        resetFields();
-		        this.revalidate();
-		        this.repaint();
-		    } else {
-		        JOptionPane.showMessageDialog(null, "Try again");
-		    }
-		});
+			if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
+				String license = getPlateNumber();
 
+				tableModel.addRow(new Object[] { license, null, getCurrentTime(), null });
+
+				methods.switchPanel(frame, this, frame.gateParkingLayout);
+				resetFields();
+				this.revalidate();
+				this.repaint();
+			} else {
+				JOptionPane.showMessageDialog(null, "Try again");
+			}
+		});
 
 		JLabel lblLogo = new JLabel(stiIcon);
 		lblLogo.setBounds(10, 10, 317, 202);
@@ -235,11 +253,11 @@ public class MainPanel extends JPanel {
 		pnlExport.setBounds(391, 470, 171, 83);
 		add(pnlExport);
 		pnlExport.setLayout(null);
-		
+
 		JButton btnExport = new JButton("💾 Export");
-		btnExport.setBounds(40, 30, 95, 35);
+		btnExport.setBounds(38, 30, 103, 35);
 		pnlExport.add(btnExport);
-		
+
 		JButton btnHelp = new JButton(helpIcon);
 		btnHelp.setBorderPainted(false);
 		btnHelp.setContentAreaFilled(false);
@@ -269,15 +287,15 @@ public class MainPanel extends JPanel {
 		comboBoxCategory.setSelectedIndex(category.equals("Student") ? 0 : 1);
 		plateTextField.setText(plateNumber);
 	}
-	
+
 	public void occupied(String occupied) {
-	    DefaultTableModel model = (DefaultTableModel) table.getModel();
-	    int lastRow = model.getRowCount() - 1;
-	    if (lastRow >= 0) {
-	        model.setValueAt(occupied, lastRow, 1);
-	    }
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		int lastRow = model.getRowCount() - 1;
+		if (lastRow >= 0) {
+			model.setValueAt(occupied, lastRow, 1);
+		}
 	}
-	
+
 	public void release(String slotID) {
 		main.releaseCar(slotID);
 	}
@@ -302,5 +320,31 @@ public class MainPanel extends JPanel {
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss a");
 		String time = currentTime.format(timeFormat);
 		return time;
+	}
+
+	private boolean isTableFilled(JTable table) {
+		int rowCount = table.getRowCount();
+		int columnCount = table.getColumnCount();
+
+		for (int row = 0; row < rowCount; row++) {
+			for (int column = 0; column < columnCount; column++) {
+				Object cellValue = table.getValueAt(row, column);
+
+				if (cellValue == null || cellValue.toString().trim().isEmpty()) {
+					return false;
+				} else {
+					sendData(table);
+					//int selectedRow = table.getSelectedRow();
+				}
+			}
+		}
+
+		return true;
+	}
+
+	private void sendData(JTable table) {
+		DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
+		main.updateTableData(sourceModel);
+		
 	}
 }
