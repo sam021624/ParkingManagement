@@ -220,29 +220,43 @@ public class MainPanel extends JPanel {
 		btnRelease.setBounds(38, 81, 103, 35);
 		pnlOperation.add(btnRelease);
 		btnRelease.addActionListener(e -> {
-			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1) {
-				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
-						"Confirmation", JOptionPane.YES_NO_OPTION);
+		    int selectedRow = table.getSelectedRow();
+		    if (selectedRow != -1) {
+		        // Confirm action
+		        int choice = JOptionPane.showConfirmDialog(
+		            null,
+		            "Are you sure you want to perform this action?",
+		            "Confirmation",
+		            JOptionPane.YES_NO_OPTION
+		        );
 
-				if (choice == JOptionPane.YES_OPTION) {
-					DefaultTableModel model = (DefaultTableModel) table.getModel();
-					model.setValueAt(getCurrentTime(), selectedRow, 3);
+		        if (choice == JOptionPane.YES_OPTION) {
+		            DefaultTableModel model = (DefaultTableModel) table.getModel();
+	                // Get slot ID before removing row
+	                String slotID = table.getValueAt(selectedRow, 1).toString();
 
-					Object value = table.getValueAt(selectedRow, 1);
+	                // Update release time for the selected row
+	                model.setValueAt(getCurrentTime(), selectedRow, 3);
+	                
+		            if (isRowFilled(selectedRow)) {
+		                // Send data for the selected row before removing it
+		                sendData(table, selectedRow);
 
-					String slotID = value.toString();
+		                // Release the slot
+		                release(slotID);
 
-					release(slotID);
-
-					if (isTableFilled(table)) {
-						isTableFilled(table);
-						model.removeRow(selectedRow);
-					}
-				}
-
-			}
+		                // Now safely remove the row
+		                model.removeRow(selectedRow);
+		            }  else {
+		                JOptionPane.showMessageDialog(
+		                    null,
+		                    "Please ensure all fields in the selected row are filled."
+		                );
+		            }
+		        }
+		    } 
 		});
+
 
 		JButton btnPark = new JButton("🚗 Park");
 		btnPark.setFocusable(false);
@@ -274,10 +288,6 @@ public class MainPanel extends JPanel {
 		add(pnlExport);
 		pnlExport.setLayout(null);
 
-		JButton btnExport = new JButton("💾 Export");
-		btnExport.setBounds(38, 30, 103, 35);
-		pnlExport.add(btnExport);
-
 		JButton btnHelp = new JButton(helpIcon);
 		btnHelp.setBorderPainted(false);
 		btnHelp.setContentAreaFilled(false);
@@ -286,6 +296,13 @@ public class MainPanel extends JPanel {
 		add(btnHelp);
 		btnHelp.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.helpPanel);
+		});
+		
+		JButton btnExport = new JButton("💾 Export");
+		btnExport.setBounds(38, 30, 103, 35);
+		pnlExport.add(btnExport);
+		btnExport.addActionListener(e -> {
+			main.export();
 		});
 
 		timer.start();
@@ -342,29 +359,29 @@ public class MainPanel extends JPanel {
 		return time;
 	}
 
-	private boolean isTableFilled(JTable table) {
-		int rowCount = table.getRowCount();
-		int columnCount = table.getColumnCount();
+	private boolean isRowFilled(int row) {
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
+	    int columnCount = table.getColumnCount();
 
-		for (int row = 0; row < rowCount; row++) {
-			for (int column = 0; column < columnCount; column++) {
-				Object cellValue = table.getValueAt(row, column);
-
-				if (cellValue == null || cellValue.toString().trim().isEmpty()) {
-					return false;
-				} else {
-					sendData(table);
-					// int selectedRow = table.getSelectedRow();
-				}
-			}
-		}
-
-		return true;
+	    for (int column = 0; column < columnCount; column++) {
+	        Object cellValue = model.getValueAt(row, column);
+	        if (cellValue == null || cellValue.toString().trim().isEmpty()) {
+	            return false;
+	        }
+	    }
+	    return true;
 	}
 
-	private void sendData(JTable table) {
-		DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
-		main.updateTableData(sourceModel);
 
+	private void sendData(JTable table, int row) {
+	    DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
+	    
+	    Object[] rowData = new Object[sourceModel.getColumnCount()];
+	    for (int col = 0; col < sourceModel.getColumnCount(); col++) {
+	        rowData[col] = sourceModel.getValueAt(row, col);
+	    }
+	    
+	    main.updateTableData(rowData);
 	}
+
 }

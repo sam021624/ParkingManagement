@@ -33,13 +33,17 @@ public class Main extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
+	
+	public void export() {
+		historyPanel.export();
+	}
 
 	public void updateInfo(String category, String studentName, String plateNumber) {
 		mainPanel.updateFields(category, studentName, plateNumber);
 	}
 
-	public void updateTableData(DefaultTableModel sourceModel) {
-		historyPanel.updateTableData(sourceModel);
+	public void updateTableData(Object[] rowData) {
+		historyPanel.updateTableData(rowData);
 	}
 
 	public void setOccupiedStatus(String occupied) {
