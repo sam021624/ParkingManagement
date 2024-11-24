@@ -1,0 +1,4 @@
+Created Validations:
+Registration of Invalid Characters that should only contains integers or numbers.
+Registration of Duplicate Characters that should have a unique Student ID
+Error message if there's too many numbers.

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,11 +22,12 @@ public class Methods {
 		frame.repaint();
 	}
 
-	public void registerInfo(int studentID, String studentName, String studentLastName, String plateNumber) {
+	public void registerInfo(int studentID, String category, String studentName, String studentLastName,
+			String plateNumber) {
 		String url = "jdbc:mysql://localhost:3306/studentdatabase";
 
 		// STUDENT ID, FIRST NAME, LAST NAME, PLATE NUMBER
-		String sql = "INSERT INTO studentInfo(student_id, first_name, last_name, plate_number) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO studentInfo(student_id, category, first_name, last_name, plate_number) VALUES(?, ?, ?, ?, ?)";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,9 +35,10 @@ public class Methods {
 
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setInt(1, studentID);
-			pst.setString(2, studentName);
-			pst.setString(3, studentLastName);
-			pst.setString(4, plateNumber);
+			pst.setString(2, category);
+			pst.setString(3, studentName);
+			pst.setString(4, studentLastName);
+			pst.setString(5, plateNumber);
 
 			int affectedRows = pst.executeUpdate();
 
@@ -44,7 +47,11 @@ public class Methods {
 			else
 				JOptionPane.showMessageDialog(null, "Try again", "Notice", JOptionPane.ERROR_MESSAGE);
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			if (e.getSQLState().equals("23000") || e.getErrorCode() == 1602) {
+				JOptionPane.showMessageDialog(null, "Duplicate Entry", "Notice!", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

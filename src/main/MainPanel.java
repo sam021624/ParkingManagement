@@ -3,17 +3,31 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
-import history.History;
+import addInfo.StudentInfo;
 
 public class MainPanel extends JPanel {
 	Main main;
@@ -128,6 +142,24 @@ public class MainPanel extends JPanel {
 			IDtextField.setFocusable(false);
 		} else
 			IDtextField.setEditable(true);
+		
+		JLabel registerLabel = new JLabel("-> ID not found? Click here");
+		registerLabel.setBounds(165, 83, 149, 14);
+		pnlParking.add(registerLabel);
+		registerLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		registerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		registerLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new StudentInfo();
+			}
+			public void mouseEntered(MouseEvent e) {
+				registerLabel.setForeground(Color.blue);
+			}
+			public void mouseExited(MouseEvent e) {
+				registerLabel.setForeground(Color.black);
+			}
+		});
 
 		JPanel pnlCars = new JPanel();
 		TitledBorder border2 = new TitledBorder(null, "Parked Car's", TitledBorder.LEADING, TitledBorder.TOP,
