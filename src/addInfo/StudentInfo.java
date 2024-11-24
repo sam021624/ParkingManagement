@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import main.Methods;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -25,9 +26,12 @@ public class StudentInfo extends JFrame {
 	private JTextField lastnameTextField;
 	private JTextField platenumberTextField;
 	private JComboBox<String> comboBoxCategory = new JComboBox<>();
+	
+	ImageIcon stiIcon = new ImageIcon(getClass().getResource("/stiIcon.png"));
 
 	public StudentInfo() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setIconImage(stiIcon.getImage());
 		this.getContentPane().setBackground(Color.yellow);
 		getContentPane().setLayout(null);
 

@@ -1,5 +1,6 @@
 package main;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -10,6 +11,8 @@ import parkingpanel.GateParkingLayout;
 
 public class Main extends JFrame {
 
+	ImageIcon stiIcon = new ImageIcon(getClass().getResource("/stiIcon.png"));
+	
 	public MainPanel mainPanel = new MainPanel(this);
 	public HelpPanel helpPanel = new HelpPanel(this);
 	public History historyPanel = new History(this);
@@ -20,6 +23,7 @@ public class Main extends JFrame {
 		getContentPane().add(mainPanel);
 
 		this.setTitle("Parking Management System");
+		this.setIconImage(stiIcon.getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.getContentPane().setLayout(null);
