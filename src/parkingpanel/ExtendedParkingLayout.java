@@ -1,30 +1,28 @@
 package parkingpanel;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
 import main.Methods;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 
-import javax.swing.*;
-import java.awt.*;
-
-public class CourtParkingLayout extends JPanel {
+public class ExtendedParkingLayout extends JPanel{
 	Methods methods = new Methods();
-
-	ImageIcon layoutIcon = new ImageIcon(getClass().getResource("/layout.png"));
+	
+	ImageIcon layoutIcon = new ImageIcon(getClass().getResource("/layout1.png"));
 	ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
-	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
 
-	public CourtParkingLayout(Main frame) {
+	public ExtendedParkingLayout(Main frame) {
 		this.setBounds(0, 0, 986, 563);
 		setLayout(null);
 
 		Image originalImage = layoutIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(966, 541, Image.SCALE_SMOOTH); 
-		ImageIcon scaledIcon = new ImageIcon(scaledImage); 
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
 		JButton btnBack = new JButton(backIcon);
 		btnBack.setBorderPainted(false);
@@ -33,17 +31,7 @@ public class CourtParkingLayout extends JPanel {
 		btnBack.setBounds(10, 323, 35, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.gateParkingLayout);
-		});
-		
-		JButton btnNext = new JButton(nextIcon);
-		btnNext.setContentAreaFilled(false);
-		btnNext.setBorderPainted(false);
-		btnNext.setFocusable(false);
-		btnNext.setBounds(941, 323, 35, 23);
-		add(btnNext);
-		btnNext.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.extendedParkingLayout);
+			methods.switchPanel(frame, this, frame.courtParkingLayout);
 		});
 		
 		JLabel lblNewLabel = new JLabel(scaledIcon);

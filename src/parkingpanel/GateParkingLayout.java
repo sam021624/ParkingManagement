@@ -29,7 +29,7 @@ public class GateParkingLayout extends JPanel {
 	private JButton[] occupyButtons = new JButton[8];
 	private JButton[] releaseButtons = new JButton[8];
 	private String slotID;
-
+	
 	public GateParkingLayout(Main frame) {
 		this.frame = frame;
 
@@ -70,7 +70,7 @@ public class GateParkingLayout extends JPanel {
 		btnNext.setBounds(941, 323, 35, 23);
 		add(btnNext);
 		btnNext.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.courtParkingLayout1);
+			methods.switchPanel(frame, this, frame.courtParkingLayout);
 		});
 
 		// BUTTON RELEASE

@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+import java.awt.SystemColor;
 
 public class StudentInfo extends JFrame {
 	Methods methods = new Methods();
@@ -100,9 +101,10 @@ public class StudentInfo extends JFrame {
 		panel.add(btnSubmit);
 
 		JLabel lblNewLabel = new JLabel("Registration");
+		lblNewLabel.setForeground(SystemColor.textHighlight);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 473, 71);
+		lblNewLabel.setBounds(10, 11, 459, 71);
 		getContentPane().add(lblNewLabel);
 		btnSubmit.addActionListener(e -> {
 			if (areFieldsEmpty()) {

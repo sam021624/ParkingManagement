@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import helpPanel.HelpPanel;
 import history.History;
 import parkingpanel.CourtParkingLayout;
+import parkingpanel.ExtendedParkingLayout;
 import parkingpanel.GateParkingLayout;
 
 public class Main extends JFrame {
@@ -17,7 +18,8 @@ public class Main extends JFrame {
 	public HelpPanel helpPanel = new HelpPanel(this);
 	public History historyPanel = new History(this);
 	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this);
-	public CourtParkingLayout courtParkingLayout1 = new CourtParkingLayout(this);
+	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this);
+	public ExtendedParkingLayout extendedParkingLayout = new ExtendedParkingLayout(this);
 
 	public Main() {
 		getContentPane().add(mainPanel);
