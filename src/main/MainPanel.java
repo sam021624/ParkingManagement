@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
@@ -14,9 +13,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +34,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -123,7 +124,7 @@ public class MainPanel extends JPanel {
 		pnlParking.add(lblID);
 
 		JPopupMenu suggestionsMenu = new JPopupMenu();
-		
+
 		IDtextField = new JTextField();
 		IDtextField.setText("");
 		IDtextField.setColumns(10);
@@ -145,26 +146,28 @@ public class MainPanel extends JPanel {
 				fetchSuggestions();
 			}
 
-            private void fetchSuggestions() {
-                String input = IDtextField.getText().trim();
-                if (input.isEmpty()) {
-                    suggestionsMenu.setVisible(false);
-                    return;
-                }
-                List<String> suggestions = getSuggestionsFromDatabase(input);
+			private void fetchSuggestions() {
+				String input = IDtextField.getText().trim();
+				if (input.isEmpty()) {
+					suggestionsMenu.setVisible(false);
+					return;
+				}
+				List<String> suggestions = getSuggestionsFromDatabase(input);
 
-                suggestionsMenu.removeAll();
-                for (String suggestion : suggestions) {
-                    JMenuItem item = new JMenuItem(suggestion);
-                    item.addActionListener(event -> {
-                    	IDtextField.setText(suggestion);
-                        suggestionsMenu.setVisible(false);
-                    });
-                    suggestionsMenu.add(item);
-                }
-                suggestionsMenu.show(IDtextField, 0, IDtextField.getHeight());
-            }
-        });
+				suggestionsMenu.removeAll();
+				for (String suggestion : suggestions) {
+					JMenuItem item = new JMenuItem(suggestion);
+					item.addActionListener(event -> {
+						IDtextField.setText(suggestion);
+						suggestionsMenu.setVisible(false);
+					});
+					suggestionsMenu.add(item);
+				}
+
+				suggestionsMenu.show(IDtextField, 0, IDtextField.getHeight());
+				IDtextField.requestFocusInWindow();
+			}
+		});
 
 		JButton btnSearch = new JButton(searchIcon);
 		btnSearch.setBounds(320, 51, 41, 37);
@@ -192,7 +195,7 @@ public class MainPanel extends JPanel {
 			IDtextField.setFocusable(false);
 		} else
 			IDtextField.setEditable(true);
-		
+
 		JLabel registerLabel = new JLabel("-> ID not found? Click here");
 		registerLabel.setBounds(165, 83, 149, 14);
 		pnlParking.add(registerLabel);
@@ -203,9 +206,11 @@ public class MainPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				new StudentInfo();
 			}
+
 			public void mouseEntered(MouseEvent e) {
 				registerLabel.setForeground(Color.blue);
 			}
+
 			public void mouseExited(MouseEvent e) {
 				registerLabel.setForeground(Color.black);
 			}
@@ -270,43 +275,30 @@ public class MainPanel extends JPanel {
 		btnRelease.setBounds(38, 81, 103, 35);
 		pnlOperation.add(btnRelease);
 		btnRelease.addActionListener(e -> {
-		    int selectedRow = table.getSelectedRow();
-		    if (selectedRow != -1) {
-		        // Confirm action
-		        int choice = JOptionPane.showConfirmDialog(
-		            null,
-		            "Are you sure you want to perform this action?",
-		            "Confirmation",
-		            JOptionPane.YES_NO_OPTION
-		        );
+			int selectedRow = table.getSelectedRow();
+			if (selectedRow != -1) {
+				// Confirm action
+				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
+						"Confirmation", JOptionPane.YES_NO_OPTION);
 
-		        if (choice == JOptionPane.YES_OPTION) {
-		            DefaultTableModel model = (DefaultTableModel) table.getModel();
-	                // Get slot ID before removing row
-	                String slotID = table.getValueAt(selectedRow, 1).toString();
+				if (choice == JOptionPane.YES_OPTION) {
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					String slotID = table.getValueAt(selectedRow, 1).toString();
 
-	                // Update release time for the selected row
-	                model.setValueAt(getCurrentTime(), selectedRow, 3);
-	                
-		            if (isRowFilled(selectedRow)) {
-		                // Send data for the selected row before removing it
-		                sendData(table, selectedRow);
+					model.setValueAt(getCurrentTime(), selectedRow, 3);
 
-		                // Release the slot
-		                release(slotID);
+					if (isRowFilled(selectedRow)) {
+						sendData(table, selectedRow);
 
-		                // Now safely remove the row
-		                model.removeRow(selectedRow);
-		            }  else {
-		                JOptionPane.showMessageDialog(
-		                    null,
-		                    "Please ensure all fields in the selected row are filled."
-		                );
-		            }
-		        }
-		    } 
+						release(slotID);
+
+						model.removeRow(selectedRow);
+					} else {
+						JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
+					}
+				}
+			}
 		});
-
 
 		JButton btnPark = new JButton("🚗 Park");
 		btnPark.setFocusable(false);
@@ -347,7 +339,7 @@ public class MainPanel extends JPanel {
 		btnHelp.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.helpPanel);
 		});
-		
+
 		JButton btnExport = new JButton("💾 Export");
 		btnExport.setBounds(38, 30, 103, 35);
 		pnlExport.add(btnExport);
@@ -410,62 +402,54 @@ public class MainPanel extends JPanel {
 	}
 
 	private boolean isRowFilled(int row) {
-	    DefaultTableModel model = (DefaultTableModel) table.getModel();
-	    int columnCount = table.getColumnCount();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		int columnCount = table.getColumnCount();
 
-	    for (int column = 0; column < columnCount; column++) {
-	        Object cellValue = model.getValueAt(row, column);
-	        if (cellValue == null || cellValue.toString().trim().isEmpty()) {
-	            return false;
-	        }
-	    }
-	    return true;
+		for (int column = 0; column < columnCount; column++) {
+			Object cellValue = model.getValueAt(row, column);
+			if (cellValue == null || cellValue.toString().trim().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
-
 
 	private void sendData(JTable table, int row) {
-	    DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
-	    
-	    Object[] rowData = new Object[sourceModel.getColumnCount()];
-	    for (int col = 0; col < sourceModel.getColumnCount(); col++) {
-	        rowData[col] = sourceModel.getValueAt(row, col);
-	    }
-	    
-	    main.updateTableData(rowData);
+		DefaultTableModel sourceModel = (DefaultTableModel) table.getModel();
+
+		Object[] rowData = new Object[sourceModel.getColumnCount()];
+		for (int col = 0; col < sourceModel.getColumnCount(); col++) {
+			rowData[col] = sourceModel.getValueAt(row, col);
+		}
+
+		main.updateTableData(rowData);
 	}
-	
+
 	private static List<String> getSuggestionsFromDatabase(String input) {
-	    List<String> suggestions = new ArrayList<>();
-	    String url = "jdbc:mysql://localhost:3306/studentdatabase";
-	    String user = "root";
-	    String password = "root";
+		List<String> suggestions = new ArrayList<>();
+		String url = "jdbc:mysql://localhost:3306/studentdatabase";
+		String user = "root";
+		String password = "root";
 
-	    // Updated query with LPAD for leading zeros
-	    String query = "SELECT LPAD(student_id, 11, '0') AS padded_student_id " +
-	                   "FROM studentInfo " +
-	                   "WHERE LPAD(student_id, 11, '0') LIKE CONCAT(?, '%') " +
-	                   "LIMIT 10";
+		String query = "SELECT student_id FROM studentInfo WHERE student_id LIKE ? LIMIT 10";
 
-	    try (Connection connection = DriverManager.getConnection(url, user, password);
-	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-	        preparedStatement.setString(1, input); // Use user input directly
-	        ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement.setString(1, input + "%");
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        while (resultSet.next()) {
-	            suggestions.add(resultSet.getString("padded_student_id")); // Fetch padded ID
-	        }
+			while (resultSet.next()) {
+				suggestions.add(resultSet.getString("student_id"));
+			}
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(),
-	                "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 
-	    return suggestions;
+		return suggestions;
 	}
-
-
-
 
 }
