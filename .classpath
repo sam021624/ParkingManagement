@@ -7,40 +7,40 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Sam/Documents/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/barcodes-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/barcodes-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/barcodes-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/font-asian-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/forms-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/forms-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/forms-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/hyph-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/io-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/io-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/io-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/kernel-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/kernel-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/kernel-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/layout-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/layout-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/layout-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdfa-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdfa-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdfa-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdftest-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdftest-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/pdftest-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/sign-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/sign-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/sign-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/styled-xml-parser-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/styled-xml-parser-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/styled-xml-parser-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/svg-7.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/svg-7.1.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/iText/svg-7.1.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/SLF4J/slf4j-api-2.0.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Sam/Documents/SLF4J/slf4j-simple-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/barcodes-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/barcodes-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/barcodes-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/font-asian-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/forms-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/forms-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/forms-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/hyph-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/io-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/io-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/io-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/kernel-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/kernel-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/kernel-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/layout-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/layout-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/layout-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdfa-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdfa-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdfa-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdftest-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdftest-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/pdftest-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/sign-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/sign-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/sign-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/styled-xml-parser-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/styled-xml-parser-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/styled-xml-parser-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/svg-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/svg-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/iText/svg-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/SLF4J/slf4j-api-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sam/Documents/JAR FILES/SLF4J/slf4j-simple-2.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
