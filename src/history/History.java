@@ -25,113 +25,118 @@ import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import main.Main;
 import main.Methods;
 
 public class History extends JPanel {
-    private JTable table;
-    private DefaultTableModel targetModel;
+	private JTable table;
+	private DefaultTableModel targetModel;
 
-    ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
-    Methods methods = new Methods();
+	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
+	Methods methods = new Methods();
 
-    public History(Main frame) {
-        this.setBackground(Color.yellow);
-        this.setBounds(0, 0, 986, 563);
-        setLayout(null);
+	public History(Main frame) {
+		this.setBackground(Color.yellow);
+		this.setBounds(0, 0, 986, 563);
+		setLayout(null);
 
-        JButton btnNext = new JButton(nextIcon);
-        btnNext.setContentAreaFilled(false);
-        btnNext.setBorderPainted(false);
-        btnNext.setFocusable(false);
-        btnNext.setBounds(941, 323, 35, 23);
-        add(btnNext);
-        btnNext.addActionListener(e -> {
-            methods.switchPanel(frame, this, frame.mainPanel);
-        });
+		JButton btnNext = new JButton(nextIcon);
+		btnNext.setContentAreaFilled(false);
+		btnNext.setBorderPainted(false);
+		btnNext.setFocusable(false);
+		btnNext.setBounds(941, 323, 35, 23);
+		add(btnNext);
+		btnNext.addActionListener(e -> {
+			methods.switchPanel(frame, this, frame.mainPanel);
+		});
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 95, 966, 457);
-        add(scrollPane);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 95, 966, 457);
+		add(scrollPane);
 
-        String[] columnNames = { "License Plate", "Occupied", "Time Parked", "Time Released" };
-        targetModel = new DefaultTableModel(null, columnNames) {
+		String[] columnNames = {"Student ID", "License Plate", "Occupied", "Time Parked", "Time Released", "Date"};
+		targetModel = new DefaultTableModel(null, columnNames) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // editable to false
 			}
-        };
-        table = new JTable(targetModel);
+		};
+		table = new JTable(targetModel);
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            TableColumn column = table.getColumnModel().getColumn(i);
-            column.setCellRenderer(centerRenderer);
-        }
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			TableColumn column = table.getColumnModel().getColumn(i);
+			column.setCellRenderer(centerRenderer);
+		}
 
-        scrollPane.setViewportView(table);
+		scrollPane.setViewportView(table);
 
-        JLabel lblNewLabel = new JLabel("PARKING HISTORY");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        lblNewLabel.setBounds(10, 11, 277, 73);
-        add(lblNewLabel);
-    }
-    
-    public void updateTableData(Object[] rowData) {
-        DefaultTableModel targetModel = (DefaultTableModel) table.getModel();
+		JLabel lblNewLabel = new JLabel("PARKING HISTORY");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblNewLabel.setBounds(10, 11, 277, 73);
+		add(lblNewLabel);
+	}
 
-        while (targetModel.getColumnCount() < rowData.length) {
-            int newColumnIndex = targetModel.getColumnCount() + 1;
-            targetModel.addColumn("Column " + newColumnIndex);
-        }
+	public void updateTableData(Object[] rowData) {
+		DefaultTableModel targetModel = (DefaultTableModel) table.getModel();
 
-        targetModel.addRow(rowData);
-    }
+		targetModel.addRow(rowData);
 
-    public void export() {
-        try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Save as PDF");
-            int userSelection = fileChooser.showSaveDialog(null);
+		int newRow = targetModel.getRowCount() - 1;
 
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToSave = fileChooser.getSelectedFile();
-                String filePath = fileToSave.getAbsolutePath();
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM-dd-yyyy");
 
-                if (!filePath.endsWith(".pdf")) {
-                    filePath += ".pdf";
-                }
+		table.setValueAt(dateFormat.format(currentDate), newRow, 5);
+	}
 
-                PdfWriter writer = new PdfWriter(filePath);
-                PdfDocument pdfDoc = new PdfDocument(writer);
-                Document document = new Document(pdfDoc);
+	public void export() {
+		try {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Save as PDF");
+			int userSelection = fileChooser.showSaveDialog(null);
 
-                Table pdfTable = new Table(targetModel.getColumnCount());
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+				File fileToSave = fileChooser.getSelectedFile();
+				String filePath = fileToSave.getAbsolutePath();
 
-                for (int col = 0; col < targetModel.getColumnCount(); col++) {
-                    String columnName = targetModel.getColumnName(col);
-                    pdfTable.addHeaderCell(new Cell().add(new Paragraph(columnName)));
-                }
+				if (!filePath.endsWith(".pdf")) {
+					filePath += ".pdf";
+				}
 
-                for (int row = 0; row < targetModel.getRowCount(); row++) {
-                    for (int col = 0; col < targetModel.getColumnCount(); col++) {
-                        Object value = targetModel.getValueAt(row, col);
-                        pdfTable.addCell(new Cell().add(new Paragraph(value != null ? value.toString() : "N/A")));
-                    }
-                }
-                
-                document.add(pdfTable);
-                document.close();
+				PdfWriter writer = new PdfWriter(filePath);
+				PdfDocument pdfDoc = new PdfDocument(writer);
+				Document document = new Document(pdfDoc);
 
-                JOptionPane.showMessageDialog(null, "Data exported to PDF successfully!", "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error exporting data: " + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
+				Table pdfTable = new Table(targetModel.getColumnCount());
+
+				for (int col = 0; col < targetModel.getColumnCount(); col++) {
+					String columnName = targetModel.getColumnName(col);
+					pdfTable.addHeaderCell(new Cell().add(new Paragraph(columnName)));
+				}
+
+				for (int row = 0; row < targetModel.getRowCount(); row++) {
+					for (int col = 0; col < targetModel.getColumnCount(); col++) {
+						Object value = targetModel.getValueAt(row, col);
+						pdfTable.addCell(new Cell().add(new Paragraph(value != null ? value.toString() : "N/A")));
+					}
+				}
+
+				document.add(pdfTable);
+				document.close();
+
+				JOptionPane.showMessageDialog(null, "Data exported to PDF successfully!", "Success",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error exporting data: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 }
