@@ -52,22 +52,25 @@ public class GateParkingLayout extends JPanel {
 		add(lblNewLabel);
 
 		JButton btnBack = new JButton(backIcon);
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnBack.setText("back");
 		btnBack.setBorderPainted(false);
-		//btnBack.setFocusPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setFocusable(false);
-		btnBack.setBounds(10, 323, 35, 23);
+		btnBack.setBounds(10, 323, 78, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
 			mainPanel.resetFields();
 			methods.switchPanel(frame, this, frame.mainPanel);
 		});
 
-		JButton btnNext = new JButton(nextIcon);
+		JButton btnNext = new JButton("next", nextIcon);
+		btnNext.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnNext.setContentAreaFilled(false);
 		btnNext.setBorderPainted(false);
 		btnNext.setFocusable(false);
-		btnNext.setBounds(941, 323, 35, 23);
+		btnNext.setBounds(898, 323, 78, 23);
+		btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
 		add(btnNext);
 		btnNext.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.courtParkingLayout);

@@ -43,13 +43,15 @@ public class History extends JPanel {
 		this.setBounds(0, 0, 986, 563);
 		setLayout(null);
 
-		JButton btnNext = new JButton(nextIcon);
-		btnNext.setContentAreaFilled(false);
-		btnNext.setBorderPainted(false);
-		btnNext.setFocusable(false);
-		btnNext.setBounds(941, 323, 35, 23);
-		add(btnNext);
-		btnNext.addActionListener(e -> {
+		JButton btnBack = new JButton("back", nextIcon);
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnBack.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBorderPainted(false);
+		btnBack.setFocusable(false);
+		btnBack.setBounds(898, 323, 78, 23);
+		add(btnBack);
+		btnBack.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.mainPanel);
 		});
 
