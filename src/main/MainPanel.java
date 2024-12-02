@@ -184,7 +184,7 @@ public class MainPanel extends JPanel {
 		add(pnlCars);
 		pnlCars.setLayout(null);
 
-		String[] columnTitle = { "License Plate", "Occupied", "Time Parked", "Time Released" };
+		String[] columnTitle = {"Student ID ", "License Plate", "Occupied", "Time Parked", "Time Released" };
 		Object[][] data = {};
 
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnTitle) {
@@ -201,11 +201,14 @@ public class MainPanel extends JPanel {
 			TableColumn column = table.getColumnModel().getColumn(i);
 			column.setCellRenderer(centerRenderer);
 		}
+		
+        TableColumn hiddenColumn = table.getColumnModel().getColumn(0); // to hide my first row
+        table.getColumnModel().removeColumn(hiddenColumn);
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 24, 384, 287);
 		pnlCars.add(scrollPane);
-
+		
 		JPanel pnlOperation = new JPanel();
 		TitledBorder border3 = new TitledBorder(null, "Operations", TitledBorder.LEADING, TitledBorder.TOP,
 				new Font("Cambria Math", Font.BOLD, 20), SystemColor.textHighlight);
@@ -244,7 +247,7 @@ public class MainPanel extends JPanel {
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
 					String slotID = table.getValueAt(selectedRow, 1).toString();
 
-					model.setValueAt(getCurrentTime(), selectedRow, 3);
+					model.setValueAt(getCurrentTime(), selectedRow, 4);
 
 					if (isRowFilled(selectedRow)) {
 						sendData(table, selectedRow);
@@ -263,9 +266,10 @@ public class MainPanel extends JPanel {
 		pnlOperation.add(btnPark);
 		btnPark.addActionListener(e -> {
 			if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
+				String studentID = getStudentID();
 				String license = getPlateNumber();
-
-				tableModel.addRow(new Object[] { license, null, getCurrentTime(), null });
+				
+				tableModel.addRow(new Object[] {studentID, license, null, getCurrentTime(), null});
 
 				methods.switchPanel(frame, this, frame.gateParkingLayout);
 				resetFields();
@@ -328,7 +332,7 @@ public class MainPanel extends JPanel {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		int lastRow = model.getRowCount() - 1;
 		if (lastRow >= 0) {
-			model.setValueAt(occupied, lastRow, 1);
+			model.setValueAt(occupied, lastRow, 2);
 		}
 	}
 
