@@ -1,12 +1,7 @@
 package parkingpanel;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-
 import main.Main;
 import main.Methods;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,20 +22,24 @@ public class CourtParkingLayout extends JPanel {
 		ImageIcon scaledIcon = new ImageIcon(scaledImage); 
 
 		JButton btnBack = new JButton(backIcon);
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnBack.setText("back");
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setFocusable(false);
-		btnBack.setBounds(10, 323, 35, 23);
+		btnBack.setBounds(10, 323, 78, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.gateParkingLayout);
 		});
 		
-		JButton btnNext = new JButton(nextIcon);
+		JButton btnNext = new JButton("next", nextIcon);
+		btnNext.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnNext.setContentAreaFilled(false);
 		btnNext.setBorderPainted(false);
 		btnNext.setFocusable(false);
-		btnNext.setBounds(941, 323, 35, 23);
+		btnNext.setBounds(898, 323, 78, 23);
+		btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
 		add(btnNext);
 		btnNext.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.extendedParkingLayout);

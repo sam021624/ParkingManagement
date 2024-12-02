@@ -1,5 +1,6 @@
 package parkingpanel;
 
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -25,10 +26,12 @@ public class ExtendedParkingLayout extends JPanel{
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
 		JButton btnBack = new JButton(backIcon);
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnBack.setText("back");
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setFocusable(false);
-		btnBack.setBounds(10, 323, 35, 23);
+		btnBack.setBounds(10, 323, 78, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.courtParkingLayout);
