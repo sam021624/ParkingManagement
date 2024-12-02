@@ -1,18 +1,16 @@
 package history;
 
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.kernel.pdf.PdfDocument;
-
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,12 +19,18 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import javax.swing.JOptionPane;
-import javax.swing.JFileChooser;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import main.Main;
 import main.Methods;
@@ -59,7 +63,7 @@ public class History extends JPanel {
 		scrollPane.setBounds(10, 95, 966, 457);
 		add(scrollPane);
 
-		String[] columnNames = {"Student ID", "License Plate", "Occupied", "Time Parked", "Time Released", "Date"};
+		String[] columnNames = { "Student ID", "License Plate", "Occupied", "Time Parked", "Time Released", "Date" };
 		targetModel = new DefaultTableModel(null, columnNames) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // editable to false
@@ -113,17 +117,39 @@ public class History extends JPanel {
 				PdfDocument pdfDoc = new PdfDocument(writer);
 				Document document = new Document(pdfDoc);
 
-				Table pdfTable = new Table(targetModel.getColumnCount());
+				PdfFont font = PdfFontFactory.createFont("Helvetica", "WinAnsi", true);
+
+				int numColumns = targetModel.getColumnCount();
+				float[] columnWidths = new float[numColumns]; 
+
+				for (int i = 0; i < numColumns; i++) {
+					columnWidths[i] = 1f;
+				}
+
+				Table pdfTable = new Table(columnWidths);
+				pdfTable.setWidth(UnitValue.createPercentValue(100)); 
 
 				for (int col = 0; col < targetModel.getColumnCount(); col++) {
 					String columnName = targetModel.getColumnName(col);
-					pdfTable.addHeaderCell(new Cell().add(new Paragraph(columnName)));
+					Cell headerCell = new Cell().add(new Paragraph(columnName)
+												.setFont(font)
+												.setBold()
+												.setFontSize(12))
+												.setBackgroundColor(ColorConstants.YELLOW)
+												.setTextAlignment(TextAlignment.CENTER) 
+												.setVerticalAlignment(VerticalAlignment.MIDDLE);
+					pdfTable.addHeaderCell(headerCell);
 				}
 
 				for (int row = 0; row < targetModel.getRowCount(); row++) {
 					for (int col = 0; col < targetModel.getColumnCount(); col++) {
 						Object value = targetModel.getValueAt(row, col);
-						pdfTable.addCell(new Cell().add(new Paragraph(value != null ? value.toString() : "N/A")));
+						Cell dataCell = new Cell()
+								.add(new Paragraph(value != null ? value.toString() : "N/A").setFont(font)
+								.setFontSize(10))
+								.setTextAlignment(TextAlignment.CENTER) 
+								.setVerticalAlignment(VerticalAlignment.MIDDLE);
+						pdfTable.addCell(dataCell);
 					}
 				}
 
@@ -133,11 +159,9 @@ public class History extends JPanel {
 				JOptionPane.showMessageDialog(null, "Data exported to PDF successfully!", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Error exporting data: " + e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Error exporting data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
