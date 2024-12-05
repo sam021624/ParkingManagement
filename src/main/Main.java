@@ -1,8 +1,9 @@
 package main;
 
 import javax.swing.ImageIcon;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
 
 import helpPanel.HelpPanel;
 import history.History;
@@ -11,16 +12,18 @@ import parkingpanel.ExtendedParkingLayout;
 import parkingpanel.GateParkingLayout;
 
 public class Main extends JFrame {
+	
+	public static JButton[] occupyButton = new JButton[15];
 
 	ImageIcon stiIcon = new ImageIcon(getClass().getResource("/stiIcon.png"));
 	
 	public MainPanel mainPanel = new MainPanel(this);
 	public HelpPanel helpPanel = new HelpPanel(this);
 	public History historyPanel = new History(this);
-	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this);
-	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this);
+	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this, occupyButton);
+	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this, occupyButton);
 	public ExtendedParkingLayout extendedParkingLayout = new ExtendedParkingLayout(this);
-
+	
 	public Main() {
 		getContentPane().add(mainPanel);
 
@@ -53,7 +56,8 @@ public class Main extends JFrame {
 	public void releaseCar(String slotID) {
 		gateParkingLayout.releaseCar(slotID);
 	}
-
+	
+	
 	public static void main(String[] args) {
 		new Main();
 	}

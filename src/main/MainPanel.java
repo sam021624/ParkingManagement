@@ -5,37 +5,14 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -184,7 +161,7 @@ public class MainPanel extends JPanel {
 		add(pnlCars);
 		pnlCars.setLayout(null);
 
-		String[] columnTitle = {"Student ID ", "License Plate", "Occupied", "Time Parked", "Time Released" };
+		String[] columnTitle = { "Student ID ", "License Plate", "Occupied", "Time Parked", "Time Released" };
 		Object[][] data = {};
 
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnTitle) {
@@ -192,6 +169,7 @@ public class MainPanel extends JPanel {
 				return false; // editable to false
 			}
 		};
+
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
 
@@ -201,14 +179,14 @@ public class MainPanel extends JPanel {
 			TableColumn column = table.getColumnModel().getColumn(i);
 			column.setCellRenderer(centerRenderer);
 		}
-		
-        TableColumn hiddenColumn = table.getColumnModel().getColumn(0); // to hide my first row
-        table.getColumnModel().removeColumn(hiddenColumn);
+
+		TableColumn hiddenColumn = table.getColumnModel().getColumn(0); // to hide my first row
+		table.getColumnModel().removeColumn(hiddenColumn);
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 24, 384, 287);
 		pnlCars.add(scrollPane);
-		
+
 		JPanel pnlOperation = new JPanel();
 		TitledBorder border3 = new TitledBorder(null, "Operations", TitledBorder.LEADING, TitledBorder.TOP,
 				new Font("Cambria Math", Font.BOLD, 20), SystemColor.textHighlight);
@@ -237,28 +215,7 @@ public class MainPanel extends JPanel {
 		btnRelease.setFocusable(false);
 		btnRelease.setBounds(38, 81, 103, 35);
 		pnlOperation.add(btnRelease);
-		btnRelease.addActionListener(e -> {
-			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1) {
-				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
-						"Confirmation", JOptionPane.YES_NO_OPTION);
-
-				if (choice == JOptionPane.YES_OPTION) {
-					DefaultTableModel model = (DefaultTableModel) table.getModel();
-					String slotID = table.getValueAt(selectedRow, 1).toString();
-
-					model.setValueAt(getCurrentTime(), selectedRow, 4);
-
-					if (isRowFilled(selectedRow)) {
-						sendData(table, selectedRow);
-
-						release(slotID);
-					} else {
-						JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
-					}
-				}
-			}
-		});
+		btnRelease.addActionListener(e -> handleRelease());
 
 		JButton btnPark = new JButton("🚗 Park");
 		btnPark.setFocusable(false);
@@ -268,8 +225,8 @@ public class MainPanel extends JPanel {
 			if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
 				String studentID = getStudentID();
 				String license = getPlateNumber();
-				
-				tableModel.addRow(new Object[] {studentID, license, null, getCurrentTime(), null});
+
+				tableModel.addRow(new Object[] { studentID, license, null, getCurrentTime(), null });
 
 				methods.switchPanel(frame, this, frame.gateParkingLayout);
 				resetFields();
@@ -309,6 +266,29 @@ public class MainPanel extends JPanel {
 		});
 
 		timer.start();
+	}
+
+	private void handleRelease() {
+		int selectedRow = table.getSelectedRow();
+		if (selectedRow != -1) {
+			int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
+					"Confirmation", JOptionPane.YES_NO_OPTION);
+
+			if (choice == JOptionPane.YES_OPTION) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				String slotID = table.getValueAt(selectedRow, 1).toString();
+
+				model.setValueAt(getCurrentTime(), selectedRow, 4);
+
+				if (isRowFilled(selectedRow)) {
+					sendData(table, selectedRow);
+
+					release(slotID);
+				} else {
+					JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
+				}
+			}
+		}
 	}
 
 	private String getStudentID() {
@@ -384,6 +364,10 @@ public class MainPanel extends JPanel {
 		}
 
 		main.updateTableData(rowData);
+	}
+
+	public int getSelectedRow() {
+		return table.getSelectedRow();
 	}
 
 }

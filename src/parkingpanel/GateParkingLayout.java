@@ -26,13 +26,14 @@ public class GateParkingLayout extends JPanel {
 	Methods methods = new Methods();
 
 	private JLabel[] carLabels = new JLabel[8];
-	private JButton[] occupyButtons = new JButton[8];
+	private JButton[] occupyButtons;
 	private JButton[] releaseButtons = new JButton[8];
 	private String slotID;
 	
-	public GateParkingLayout(Main frame) {
+	public GateParkingLayout(Main frame, JButton[] occupyButton) {
 		this.frame = frame;
-
+		this.occupyButtons = occupyButton;
+		
 		this.setBounds(0, 0, 986, 563);
 		setLayout(null);
 
@@ -94,7 +95,6 @@ public class GateParkingLayout extends JPanel {
 		releaseButtons[7] = createReleaseButton("Release", 849, 253);
 
 		// BUTTON OCCUPY
-
 		occupyButtons[0] = createOccupyButton("Occupy", 30, 114);
 		occupyButtons[0].addActionListener(e -> {
 			occupyButtons[0].setVisible(false);
@@ -223,10 +223,7 @@ public class GateParkingLayout extends JPanel {
 		frame.setOccupiedStatus(occupied);
 	}
 
-	private void hide(JButton button) {
-		button.setVisible(false);
-	}
-
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
