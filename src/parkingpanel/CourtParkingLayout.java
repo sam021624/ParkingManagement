@@ -447,10 +447,58 @@ public class CourtParkingLayout extends JPanel {
 		btnNewButton_2_1_5_1.setBounds(920, 490, 22, 38);
 		add(btnNewButton_2_1_5_1);
 		
+		JButton btnNewButton_2_1_4_2 = new JButton("");
+		btnNewButton_2_1_4_2.setBounds(890, 214, 22, 38);
+		add(btnNewButton_2_1_4_2);
+		
+		JButton btnNewButton_2_1_5_2 = new JButton("");
+		btnNewButton_2_1_5_2.setBounds(920, 214, 22, 38);
+		add(btnNewButton_2_1_5_2);
+		
+		JButton btnNewButton_2_1_3_1_1 = new JButton("");
+		btnNewButton_2_1_3_1_1.setBounds(263, 33, 22, 64);
+		add(btnNewButton_2_1_3_1_1);
+		
+		JButton btnNewButton_2_1_4_1_1 = new JButton("");
+		btnNewButton_2_1_4_1_1.setBounds(297, 33, 22, 64);
+		add(btnNewButton_2_1_4_1_1);
+		
+		JButton btnNewButton_2_1_5_1_1 = new JButton("");
+		btnNewButton_2_1_5_1_1.setBounds(330, 33, 22, 64);
+		add(btnNewButton_2_1_5_1_1);
+		
+		JButton btnNewButton_2_1_3_1_1_1 = new JButton("");
+		btnNewButton_2_1_3_1_1_1.setBounds(31, 403, 22, 96);
+		add(btnNewButton_2_1_3_1_1_1);
+		
+		JButton btnNewButton_2_1_4_1_1_1 = new JButton("");
+		btnNewButton_2_1_4_1_1_1.setBounds(67, 403, 22, 96);
+		add(btnNewButton_2_1_4_1_1_1);
+		
+		JButton btnNewButton_2_1_5_1_1_1 = new JButton("");
+		btnNewButton_2_1_5_1_1_1.setBounds(102, 403, 22, 96);
+		add(btnNewButton_2_1_5_1_1_1);
+		
+		JButton btnNewButton_2_1_4_1_1_1_1 = new JButton("");
+		btnNewButton_2_1_4_1_1_1_1.setBounds(69, 74, 22, 96);
+		add(btnNewButton_2_1_4_1_1_1_1);
+		
+		JButton btnNewButton_2_1_3_1_1_1_1 = new JButton("");
+		btnNewButton_2_1_3_1_1_1_1.setBounds(33, 74, 22, 96);
+		add(btnNewButton_2_1_3_1_1_1_1);
+		
+		JButton btnNewButton_2_1_4_1_1_1_1_1 = new JButton("");
+		btnNewButton_2_1_4_1_1_1_1_1.setBounds(229, 360, 22, 69);
+		add(btnNewButton_2_1_4_1_1_1_1_1);
+		
+		JButton button1_1_2_3 = new JButton();
+		button1_1_2_3.setFocusable(false);
+		button1_1_2_3.setBounds(464, 62, 40, 21);
+		add(button1_1_2_3);
+		
 		JLabel lblLayout = new JLabel(scaledIcon);
 		lblLayout.setBounds(0, 0, 986, 563);
 		add(lblLayout);
-		
 	}
 	
 	private void parkSuccess(String occupied) {
