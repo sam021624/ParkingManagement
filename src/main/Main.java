@@ -54,9 +54,9 @@ public class Main extends JFrame {
 	}
 
 	public void releaseCar(String slotID) {
+		courtParkingLayout.releaseCar(slotID);
 		gateParkingLayout.releaseCar(slotID);
 	}
-	
 	
 	public static void main(String[] args) {
 		new Main();

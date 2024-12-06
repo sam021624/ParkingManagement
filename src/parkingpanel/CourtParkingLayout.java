@@ -53,35 +53,42 @@ public class CourtParkingLayout extends JPanel {
 			methods.switchPanel(frame, this, frame.extendedParkingLayout);
 		});
 		
-//		occupyButtons[9] = new JButton("New button");
-//		occupyButtons[9].setBounds(464, 208, 40, 21);
-//		add(occupyButtons[9]);
-//		occupyButtons[9].addActionListener(e -> {
-//			parkSuccess("15");
-//		});
-		
-		JButton button1 = new JButton();
-		button1.setFocusable(false);
-		button1.setBounds(464, 208, 40, 21);
-		add(button1);
-		button1.addActionListener(e -> {
-			button1.setVisible(false);
+		occupyButtons[0] = new JButton();				//01
+		occupyButtons[0].setFocusable(false);
+		occupyButtons[0].setBounds(464, 208, 40, 21);
+		add(occupyButtons[0]);
+		occupyButtons[0].addActionListener(e -> {
+			occupyButtons[0].setVisible(false);
+			parkSuccess("01");
 		});
 		
-		JButton button1_1 = new JButton();
-		button1_1.setFocusable(false);
-		button1_1.setBounds(464, 179, 40, 21);
-		add(button1_1);
+		occupyButtons[10] = new JButton();				//02
+		occupyButtons[10].setFocusable(false);
+		occupyButtons[10].setBounds(464, 179, 40, 21);
+		add(occupyButtons[10]);
+		occupyButtons[10].addActionListener(e -> {
+		});
+		
+		occupyButtons[11] = new JButton();			//03
+		occupyButtons[11].setFocusable(false);
+		occupyButtons[11].setBounds(464, 149, 40, 21);
+		add(occupyButtons[11]);
+		occupyButtons[11].addActionListener(e -> {
+		});
+		
+		JButton button1_1_2_3 = new JButton();
+		button1_1_2_3.setFocusable(false);
+		button1_1_2_3.setBounds(464, 62, 40, 21);
+		add(button1_1_2_3);
 		
 		JButton button1_1_1 = new JButton();
+		button1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		button1_1_1.setFocusable(false);
 		button1_1_1.setBounds(464, 120, 40, 21);
 		add(button1_1_1);
-		
-		JButton button1_2 = new JButton();
-		button1_2.setFocusable(false);
-		button1_2.setBounds(464, 149, 40, 21);
-		add(button1_2);
 		
 		JButton button1_1_2 = new JButton();
 		button1_1_2.setFocusable(false);
@@ -491,14 +498,19 @@ public class CourtParkingLayout extends JPanel {
 		btnNewButton_2_1_4_1_1_1_1_1.setBounds(229, 360, 22, 69);
 		add(btnNewButton_2_1_4_1_1_1_1_1);
 		
-		JButton button1_1_2_3 = new JButton();
-		button1_1_2_3.setFocusable(false);
-		button1_1_2_3.setBounds(464, 62, 40, 21);
-		add(button1_1_2_3);
-		
 		JLabel lblLayout = new JLabel(scaledIcon);
 		lblLayout.setBounds(0, 0, 986, 563);
 		add(lblLayout);
+	}
+	
+	public void releaseCar(String slotID) {
+		int slotNumber = Integer.parseInt(slotID) - 1; // Convert slotId to index (e.g., "01" -> 0)
+		if (slotNumber >= 0) {
+			JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			occupyButtons[slotNumber].setVisible(true);
+		}
 	}
 	
 	private void parkSuccess(String occupied) {

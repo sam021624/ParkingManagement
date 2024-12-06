@@ -28,7 +28,6 @@ public class GateParkingLayout extends JPanel {
 	private JLabel[] carLabels = new JLabel[8];
 	private JButton[] occupyButtons;
 	private JButton[] releaseButtons = new JButton[8];
-	private String slotID;
 	
 	public GateParkingLayout(Main frame, JButton[] occupyButton) {
 		this.frame = frame;
@@ -101,6 +100,8 @@ public class GateParkingLayout extends JPanel {
 			releaseButtons[0].setVisible(true);
 			carLabels[0].setVisible(true);
 			parkSuccess("01");
+			revalidate();
+			repaint();
 		});
 
 		occupyButtons[1] = createOccupyButton("Occupy", 147, 114);
@@ -204,7 +205,6 @@ public class GateParkingLayout extends JPanel {
 	}
 
 	public void releaseCar(String slotID) {
-		this.slotID = slotID;
 		int slotNumber = Integer.parseInt(slotID) - 1; // Convert slotId to index (e.g., "01" -> 0)
 		if (slotNumber >= 0 && slotNumber < releaseButtons.length) {
 			releaseButtons[slotNumber].setVisible(false);
