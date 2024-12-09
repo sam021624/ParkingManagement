@@ -27,7 +27,7 @@ public class GateParkingLayout extends JPanel {
     MainPanel mainPanel = new MainPanel(frame);
     Methods methods = new Methods();
 
-    private Map<String, Object[]> occupyMap = new HashMap<>();
+    private Map<String, Object[]> occupyButtons = new HashMap<>();
     private JLabel[] carLabels = new JLabel[8];
 
     public GateParkingLayout(Main frame) {
@@ -133,14 +133,14 @@ public class GateParkingLayout extends JPanel {
             parkSuccess("97");
         });
 
-        occupyMap.put("90", new Object[]{btn90, carLabels[0]});
-        occupyMap.put("91", new Object[]{btn91, carLabels[1]});
-        occupyMap.put("92", new Object[]{btn92, carLabels[2]});
-        occupyMap.put("93", new Object[]{btn93, carLabels[3]});
-        occupyMap.put("94", new Object[]{btn94, carLabels[4]});
-        occupyMap.put("95", new Object[]{btn95, carLabels[5]});
-        occupyMap.put("96", new Object[]{btn96, carLabels[6]});
-        occupyMap.put("97", new Object[]{btn97, carLabels[7]});
+        occupyButtons.put("90", new Object[]{btn90, carLabels[0]});
+        occupyButtons.put("91", new Object[]{btn91, carLabels[1]});
+        occupyButtons.put("92", new Object[]{btn92, carLabels[2]});
+        occupyButtons.put("93", new Object[]{btn93, carLabels[3]});
+        occupyButtons.put("94", new Object[]{btn94, carLabels[4]});
+        occupyButtons.put("95", new Object[]{btn95, carLabels[5]});
+        occupyButtons.put("96", new Object[]{btn96, carLabels[6]});
+        occupyButtons.put("97", new Object[]{btn97, carLabels[7]});
 
         createLabels();
     }
@@ -178,8 +178,8 @@ public class GateParkingLayout extends JPanel {
     }
 
     public void releaseCarGate(String slotID) {
-        if (occupyMap.containsKey(slotID)) {
-            Object[] components = occupyMap.get(slotID);
+        if (occupyButtons.containsKey(slotID)) {
+            Object[] components = occupyButtons.get(slotID);
             JButton button = (JButton) components[0];
             JLabel label = (JLabel) components[1];
 

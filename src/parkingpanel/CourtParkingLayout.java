@@ -16,12 +16,12 @@ import main.Main;
 import main.Methods;
 
 public class CourtParkingLayout extends JPanel {
-	private Map<String, JButton> occupyButtons = new HashMap<>();
+	private Map<String, Object[]> occupyButtons = new HashMap<>();
 
 	Main frame;
 	
 	Methods methods = new Methods();
-	private JLabel[] carLabels = new JLabel[8];
+	private JLabel[] motorLabels = new JLabel[89];
 
 	ImageIcon motorcycleIcon = new ImageIcon((getClass().getResource("/motorcycle.png")));
 	ImageIcon layoutIcon = new ImageIcon(getClass().getResource("/layout.png"));
@@ -61,18 +61,103 @@ public class CourtParkingLayout extends JPanel {
 			methods.switchPanel(frame, this, frame.extendedParkingLayout);
 		});
 		
-		JLabel lbl01 = new JLabel(motorcycleIcon);
-		lbl01.setBounds(467, 206, 40, 21);
-		lbl01.setVisible(false);
-		add(lbl01);
-		
+		motorLabels[0] = createMotorLabels(467, 206);
+		motorLabels[1] = createMotorLabels(467, 177);
+		motorLabels[2] = createMotorLabels(467, 147);
+		motorLabels[3] = createMotorLabels(467, 118);
+		motorLabels[4] = createMotorLabels(467, 89);
+		motorLabels[5] = createMotorLabels(467, 60);
+		motorLabels[6] = createMotorLabels(556, 206);
+		motorLabels[7] = createMotorLabels(556, 176);
+		motorLabels[8] = createMotorLabels(556, 147);
+		motorLabels[9] = createMotorLabels(556, 118);
+		motorLabels[10] = createMotorLabels(556, 89);
+		motorLabels[11] = createMotorLabels(556, 60);
+		motorLabels[12] = createMotorLabels(556, 31);
+		motorLabels[13] = createMotorLabels(602, 206);
+		motorLabels[14] = createMotorLabels(602, 176);
+		motorLabels[15] = createMotorLabels(602, 147);
+		motorLabels[16] = createMotorLabels(602, 118);
+		motorLabels[17] = createMotorLabels(602, 89);
+		motorLabels[18] = createMotorLabels(602, 60);
+		motorLabels[19] = createMotorLabels(602, 31);
+		motorLabels[20] = createMotorLabels(689, 33);
+		motorLabels[21] = createMotorLabels(721, 33);
+		motorLabels[22] = createMotorLabels(753, 33);
+		motorLabels[23] = createMotorLabels(785, 33);
+		motorLabels[24] = createMotorLabels(782, 177);
+		motorLabels[25] = createMotorLabels(750, 177);
+		motorLabels[26] = createMotorLabels(719, 177);
+		motorLabels[27] = createMotorLabels(687, 177);
+		motorLabels[28] = createMotorLabels(453, 505);
+		motorLabels[29] = createMotorLabels(453, 476);
+		motorLabels[30] = createMotorLabels(453, 447);
+		motorLabels[31] = createMotorLabels(453, 416);
+		motorLabels[32] = createMotorLabels(453, 387);
+		motorLabels[33] = createMotorLabels(453, 358);
+		motorLabels[34] = createMotorLabels(548, 505);
+		motorLabels[35] = createMotorLabels(548, 476);
+		motorLabels[36] = createMotorLabels(548, 447);
+		motorLabels[37] = createMotorLabels(548, 418);
+		motorLabels[38] = createMotorLabels(548, 387);
+		motorLabels[39] = createMotorLabels(548, 358);
+		motorLabels[40] = createMotorLabels(595, 505);
+		motorLabels[41] = createMotorLabels(595, 476);
+		motorLabels[42] = createMotorLabels(595, 447);
+		motorLabels[43] = createMotorLabels(595, 418);
+		motorLabels[44] = createMotorLabels(595, 387);
+		motorLabels[45] = createMotorLabels(595, 358);
+		motorLabels[46] = createMotorLabels(697, 358);
+		motorLabels[47] = createMotorLabels(697, 387);
+		motorLabels[48] = createMotorLabels(697, 418);
+		motorLabels[49] = createMotorLabels(697, 447);
+		motorLabels[50] = createMotorLabels(697, 476);
+		motorLabels[51] = createMotorLabels(697, 505);
+		motorLabels[52] = createMotorLabels(744, 505);
+		motorLabels[53] = createMotorLabels(744, 476);
+		motorLabels[54] = createMotorLabels(744, 447);
+		motorLabels[55] = createMotorLabels(744, 418);
+		motorLabels[56] = createMotorLabels(744, 387);
+		motorLabels[57] = createMotorLabels(744, 358);
+		motorLabels[58] = createMotorLabels(827, 488);
+		motorLabels[59] = createMotorLabels(859, 488);
+		motorLabels[60] = createMotorLabels(889, 488);
+		motorLabels[61] = createMotorLabels(920, 488);
+		motorLabels[62] = createMotorLabels(920, 370);
+		motorLabels[63] = createMotorLabels(889, 370);
+		motorLabels[64] = createMotorLabels(859, 370);
+		motorLabels[65] = createMotorLabels(827, 370);
+		motorLabels[66] = createMotorLabels(920, 214);
+		motorLabels[67] = createMotorLabels(889, 214);
+		motorLabels[68] = createMotorLabels(403, 505);
+		motorLabels[69] = createMotorLabels(403, 476);
+		motorLabels[70] = createMotorLabels(403, 447);
+		motorLabels[71] = createMotorLabels(403, 416);
+		motorLabels[72] = createMotorLabels(403, 387);
+		motorLabels[73] = createMotorLabels(403, 358);
+		motorLabels[74] = createMotorLabels(318, 505);
+		motorLabels[75] = createMotorLabels(318, 476);
+		motorLabels[76] = createMotorLabels(318, 447);
+		motorLabels[77] = createMotorLabels(318, 416);
+		motorLabels[78] = createMotorLabels(318, 387);
+		motorLabels[79] = createMotorLabels(318, 358);
+		motorLabels[80] = createMotorLabels(333, 31);
+		motorLabels[81] = createMotorLabels(300, 31);
+		motorLabels[82] = createMotorLabels(266, 31);
+		motorLabels[83] = createMotorLabels(232, 358);
+		motorLabels[84] = createMotorLabels(73, 72);
+		motorLabels[85] = createMotorLabels(37, 72);
+		motorLabels[86] = createMotorLabels(106, 401);
+		motorLabels[87] = createMotorLabels(70, 401);
+		motorLabels[88] = createMotorLabels(34, 401);
+
 		JButton btn01 = new JButton();				
 		btn01.setFocusable(false);
 		btn01.setBounds(467, 206, 40, 21);
 		add(btn01);
 		btn01.addActionListener(e -> {
 			btn01.setVisible(false);
-			lbl01.setVisible(true);
+			motorLabels[0].setVisible(true);
 			parkSuccess("01");
 		});
 		
@@ -82,6 +167,7 @@ public class CourtParkingLayout extends JPanel {
 		add(btn02);
 		btn02.addActionListener(e -> {
 			btn02.setVisible(false);
+			motorLabels[1].setVisible(true);
 			parkSuccess("02");
 		});
 		
@@ -91,6 +177,7 @@ public class CourtParkingLayout extends JPanel {
 		add(btn03);
 		btn03.addActionListener(e -> {
 			btn03.setVisible(false);
+			motorLabels[2].setVisible(true);
 			parkSuccess("03");
 		});
 		
@@ -98,21 +185,41 @@ public class CourtParkingLayout extends JPanel {
 		btn04.setFocusable(false);
 		btn04.setBounds(467, 118, 40, 21);
 		add(btn04);
+		btn04.addActionListener(e -> {
+			btn04.setVisible(false);
+			motorLabels[3].setVisible(true);
+			parkSuccess("04");
+		});
 		
 		JButton btn05 = new JButton();
 		btn05.setFocusable(false);
 		btn05.setBounds(467, 89, 40, 21);
 		add(btn05);
+		btn05.addActionListener(e -> {
+			btn05.setVisible(false);
+			motorLabels[4].setVisible(true);
+			parkSuccess("05");
+		});
 		
 		JButton btn06 = new JButton();
 		btn06.setFocusable(false);
 		btn06.setBounds(467, 60, 40, 21);
 		add(btn06);
+		btn06.addActionListener(e -> {
+			btn06.setVisible(false);
+			motorLabels[5].setVisible(true);
+			parkSuccess("06");
+		});
 		
 		JButton btn07 = new JButton();
 		btn07.setFocusable(false);
 		btn07.setBounds(556, 206, 40, 21);
 		add(btn07);
+		btn07.addActionListener(e -> {
+			btn07.setVisible(false);
+			motorLabels[6].setVisible(true);
+			parkSuccess("07");
+		});
 		
 		JButton btn08 = new JButton();
 		btn08.setFocusable(false);
@@ -120,6 +227,7 @@ public class CourtParkingLayout extends JPanel {
 		add(btn08);
 		btn08.addActionListener(e -> {
 			btn08.setVisible(false);
+			motorLabels[7].setVisible(true);
 			parkSuccess("08");
 		});
 		
@@ -129,6 +237,7 @@ public class CourtParkingLayout extends JPanel {
 		add(btn09);
 		btn09.addActionListener(e -> {
 			btn09.setVisible(false);
+			motorLabels[8].setVisible(true);
 			parkSuccess("09");
 		});
 		
@@ -136,11 +245,21 @@ public class CourtParkingLayout extends JPanel {
 		btn10.setFocusable(false);
 		btn10.setBounds(556, 118, 40, 21);
 		add(btn10);
+		btn10.addActionListener(e -> {
+			btn10.setVisible(false);
+			motorLabels[9].setVisible(true);
+			parkSuccess("10");
+		});
 		
 		JButton btn11 = new JButton();
 		btn11.setFocusable(false);
 		btn11.setBounds(556, 89, 40, 21);
 		add(btn11);
+		btn11.addActionListener(e -> {
+			btn11.setVisible(false);
+			motorLabels[10].setVisible(true);
+			parkSuccess("11");
+		});
 		
 		JButton btn12 = new JButton();
 		btn12.setFocusable(false);
@@ -522,38 +641,44 @@ public class CourtParkingLayout extends JPanel {
 		lblLayout.setBounds(0, 0, 986, 563);
 		add(lblLayout);
 		
+		occupyButtons.put("01", new Object[] {btn01, motorLabels[0]});
+		occupyButtons.put("02", new Object[] {btn02, motorLabels[1]});
+		occupyButtons.put("03", new Object[] {btn03, motorLabels[2]});
+		occupyButtons.put("04", new Object[] {btn04, motorLabels[3]});
+		occupyButtons.put("05", new Object[] {btn05, motorLabels[4]});
+		occupyButtons.put("06", new Object[] {btn06, motorLabels[5]});
+		occupyButtons.put("07", new Object[] {btn07, motorLabels[6]});
+		occupyButtons.put("08", new Object[] {btn08, motorLabels[7]});
+		occupyButtons.put("09", new Object[] {btn09, motorLabels[8]});
+		occupyButtons.put("10", new Object[] {btn10, motorLabels[9]});
+		occupyButtons.put("11", new Object[] {btn11, motorLabels[10]});
 	}
 	
-	private void addParkingAction(JButton button, String slotID) {
-	    button.addActionListener(e -> {
-	        button.setVisible(false);
-	        parkSuccess(slotID);
-	        
-	        occupyButtons.put(slotID, button);
-	    });
-	}
-	
-	private JLabel createCarLabels(int x, int y) {
-		JLabel label = new JLabel("🏍");
-		label.setBounds(x, y, 40, 21);
-		label.setVisible(false);
-		add(label);
+	private JLabel createMotorLabels(int x, int y) {
+	    Image originalImage = motorcycleIcon.getImage();
+	    Image scaledImage = originalImage.getScaledInstance(40, 21, Image.SCALE_SMOOTH); 
+	    ImageIcon scaledIcon = new ImageIcon(scaledImage); 
 
-		return label;
+	    JLabel label = new JLabel();
+	    label.setIcon(scaledIcon);
+	    label.setBounds(x, y, 40, 21);
+	    label.setVisible(false);
+	    add(label);
+
+	    return label;
 	}
 	
 	public void releaseCar(String slotID) {
-	    // Check if the slot ID exists in the HashMap
 	    if (occupyButtons.containsKey(slotID)) {
-	        // Access the button using the slot ID
-	        JButton button = occupyButtons.get(slotID);
+	    	Object[] components = occupyButtons.get(slotID);
+            JButton button = (JButton) components[0];
+            JLabel label = (JLabel) components[1];
 	        
-	        // Show a message dialog indicating the car has been released
 	        JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
 	                JOptionPane.INFORMATION_MESSAGE);
 	        
-	        // Make the button visible again
 	        button.setVisible(true);
+	        label.setVisible(false);
 	    }
 	}
 
