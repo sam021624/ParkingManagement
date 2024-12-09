@@ -54,7 +54,7 @@ public class Main extends JFrame {
 	}
 
 	public void releaseCar(String slotID) {
-		courtParkingLayout.releaseCar(slotID);
+		//courtParkingLayout.releaseCar(slotID);
 		gateParkingLayout.releaseCar(slotID);
 	}
 	

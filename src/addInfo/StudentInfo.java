@@ -108,11 +108,11 @@ public class StudentInfo extends JFrame {
 		getContentPane().add(lblNewLabel);
 		btnSubmit.addActionListener(e -> {
 			if (areFieldsEmpty()) {
-				JOptionPane.showMessageDialog(null, "Fill in the Blanks");
+				JOptionPane.showMessageDialog(null, "Fill in the Blanks", "Notice", JOptionPane.ERROR_MESSAGE);
 			} else if (idTextField.getText().length() > 11) {
 					JOptionPane.showMessageDialog(null, "Student number only contains 11 numbers.", "Notice!", JOptionPane.ERROR_MESSAGE);
 			} else if (!idTextField.getText().matches("\\d+")) {
-				JOptionPane.showMessageDialog(null, "Student ID should contain numbers only", "Notice!",
+				JOptionPane.showMessageDialog(null, "Student number should contain numbers only", "Notice!",
 						JOptionPane.ERROR_MESSAGE);
 			}
 			else {
@@ -148,9 +148,10 @@ public class StudentInfo extends JFrame {
 	}
 
 	public boolean areFieldsEmpty() {
-		return idTextField.getText() == null && firstnameTextField.getText() == null
-				&& lastnameTextField.getText() == null && comboBoxCategory.getSelectedIndex() == -1
-				&& platenumberTextField.getText() == null;
+	    return firstnameTextField.getText().trim().isEmpty() 
+	            || lastnameTextField.getText().trim().isEmpty() 
+	            || comboBoxCategory.getSelectedIndex() == -1 
+	            || platenumberTextField.getText().trim().isEmpty();
 	}
 
 	public void clearAll() {
