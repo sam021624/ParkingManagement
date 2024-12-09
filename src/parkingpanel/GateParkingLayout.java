@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,228 +19,199 @@ import main.MainPanel;
 import main.Methods;
 
 public class GateParkingLayout extends JPanel {
-	ImageIcon car = new ImageIcon((getClass().getResource("/carvertical.png")));
-	ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
-	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
+    ImageIcon car = new ImageIcon((getClass().getResource("/carvertical.png")));
+    ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
+    ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
 
-	Main frame;
-	MainPanel mainPanel = new MainPanel(frame);
-	Methods methods = new Methods();
+    Main frame;
+    MainPanel mainPanel = new MainPanel(frame);
+    Methods methods = new Methods();
 
-	private JLabel[] carLabels = new JLabel[8];
-	private JButton[] occupyButtons;
-	private JButton[] releaseButtons = new JButton[8];
-	
-	public GateParkingLayout(Main frame, JButton[] occupyButton) {
-		this.frame = frame;
-		this.occupyButtons = occupyButton;
-		
-		this.setBounds(0, 0, 986, 563);
-		setLayout(null);
+    private Map<String, Object[]> occupyMap = new HashMap<>();
+    private JLabel[] carLabels = new JLabel[8];
 
-		carLabels[0] = createCarLabels("Occupy", 30, 35);
-		carLabels[1] = createCarLabels("Occupy", 147, 35);
-		carLabels[2] = createCarLabels("Occupy", 264, 35);
-		carLabels[3] = createCarLabels("Occupy", 381, 35);
-		carLabels[4] = createCarLabels("Occupy", 498, 35);
-		carLabels[5] = createCarLabels("Occupy", 615, 35);
-		carLabels[6] = createCarLabels("Occupy", 732, 35);
-		carLabels[7] = createCarLabels("Occupy", 849, 35);
+    public GateParkingLayout(Main frame) {
+        this.frame = frame;
 
-		JLabel lblNewLabel = new JLabel("Gate Parking");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 60));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 306, 966, 246);
-		add(lblNewLabel);
+        this.setBounds(0, 0, 986, 563);
+        setLayout(null);
 
-		JButton btnBack = new JButton(backIcon);
-		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnBack.setText("back");
-		btnBack.setBorderPainted(false);
-		btnBack.setContentAreaFilled(false);
-		btnBack.setFocusable(false);
-		btnBack.setBounds(10, 323, 78, 23);
-		add(btnBack);
-		btnBack.addActionListener(e -> {
-			mainPanel.resetFields();
-			methods.switchPanel(frame, this, frame.mainPanel);
-		});
+        carLabels[0] = createCarLabels("Occupy", 30, 35);
+        carLabels[1] = createCarLabels("Occupy", 147, 35);
+        carLabels[2] = createCarLabels("Occupy", 264, 35);
+        carLabels[3] = createCarLabels("Occupy", 381, 35);
+        carLabels[4] = createCarLabels("Occupy", 498, 35);
+        carLabels[5] = createCarLabels("Occupy", 615, 35);
+        carLabels[6] = createCarLabels("Occupy", 732, 35);
+        carLabels[7] = createCarLabels("Occupy", 849, 35);
 
-		JButton btnNext = new JButton("next", nextIcon);
-		btnNext.setFont(new Font("Tahoma", Font.BOLD, 10));
-		btnNext.setContentAreaFilled(false);
-		btnNext.setBorderPainted(false);
-		btnNext.setFocusable(false);
-		btnNext.setBounds(898, 323, 78, 23);
-		btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
-		add(btnNext);
-		btnNext.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.courtParkingLayout);
-		});
+        JLabel lblTitle = new JLabel("Gate Parking");
+        lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 60));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setBounds(10, 306, 966, 246);
+        add(lblTitle);
 
-		// BUTTON RELEASE
-		releaseButtons[0] = createReleaseButton("Release", 30, 253);
-		releaseButtons[0].addActionListener(e -> {
-			occupyButtons[0].setVisible(true); 
-			JOptionPane.showMessageDialog(null, "Slot " + 01 + " is now released!", "Notice!",
-					JOptionPane.INFORMATION_MESSAGE);
+        JButton btnBack = new JButton(backIcon);
+        btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
+        btnBack.setText("back");
+        btnBack.setBorderPainted(false);
+        btnBack.setContentAreaFilled(false);
+        btnBack.setFocusable(false);
+        btnBack.setBounds(10, 323, 78, 23);
+        add(btnBack);
+        btnBack.addActionListener(e -> {
+            mainPanel.resetFields();
+            methods.switchPanel(frame, this, frame.mainPanel);
+        });
 
-		});
+        JButton btnNext = new JButton("next", nextIcon);
+        btnNext.setFont(new Font("Tahoma", Font.BOLD, 10));
+        btnNext.setContentAreaFilled(false);
+        btnNext.setBorderPainted(false);
+        btnNext.setFocusable(false);
+        btnNext.setBounds(898, 323, 78, 23);
+        btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
+        add(btnNext);
+        btnNext.addActionListener(e -> {
+            methods.switchPanel(frame, this, frame.courtParkingLayout);
+        });
 
-		releaseButtons[1] = createReleaseButton("Release", 147, 253);
-		releaseButtons[2] = createReleaseButton("Release", 264, 253);
-		releaseButtons[3] = createReleaseButton("Release", 381, 253);
-		releaseButtons[4] = createReleaseButton("Release", 498, 253);
-		releaseButtons[5] = createReleaseButton("Release", 615, 253);
-		releaseButtons[6] = createReleaseButton("Release", 732, 253);
-		releaseButtons[7] = createReleaseButton("Release", 849, 253);
+        // BUTTON OCCUPY
+        JButton btn90 = createOccupyButton("Occupy", 30, 114);
+        btn90.addActionListener(e -> {
+            btn90.setVisible(false);
+            carLabels[0].setVisible(true);
+            parkSuccess("90");
+        });
 
-		// BUTTON OCCUPY
-		occupyButtons[0] = createOccupyButton("Occupy", 30, 114);
-		occupyButtons[0].addActionListener(e -> {
-			occupyButtons[0].setVisible(false);
-			releaseButtons[0].setVisible(true);
-			carLabels[0].setVisible(true);
-			parkSuccess("01");
-			revalidate();
-			repaint();
-		});
+        JButton btn91 = createOccupyButton("Occupy", 147, 114);
+        btn91.addActionListener(e -> {
+            btn91.setVisible(false);
+            carLabels[1].setVisible(true);
+            parkSuccess("91");
+        });
 
-		occupyButtons[1] = createOccupyButton("Occupy", 147, 114);
-		occupyButtons[1].addActionListener(e -> {
-			occupyButtons[1].setVisible(false);
-			releaseButtons[1].setVisible(true);
-			carLabels[1].setVisible(true);
-			parkSuccess("02");
-		});
+        JButton btn92 = createOccupyButton("Occupy", 264, 114);
+        btn92.addActionListener(e -> {
+            btn92.setVisible(false);
+            carLabels[2].setVisible(true);
+            parkSuccess("92");
+        });
 
-		occupyButtons[2] = createOccupyButton("Occupy", 264, 114);
-		occupyButtons[2].addActionListener(e -> {
-			occupyButtons[2].setVisible(false);
-			releaseButtons[2].setVisible(true);
-			carLabels[2].setVisible(true);
-			parkSuccess("03");
-		});
+        JButton btn93 = createOccupyButton("Occupy", 381, 114);
+        btn93.addActionListener(e -> {
+            btn93.setVisible(false);
+            carLabels[3].setVisible(true);
+            parkSuccess("93");
+        });
 
-		occupyButtons[3] = createOccupyButton("Occupy", 381, 114);
-		occupyButtons[3].addActionListener(e -> {
-			occupyButtons[3].setVisible(false);
-			releaseButtons[3].setVisible(true);
-			carLabels[3].setVisible(true);
-			parkSuccess("04");
-		});
+        JButton btn94 = createOccupyButton("Occupy", 498, 114);
+        btn94.addActionListener(e -> {
+            btn94.setVisible(false);
+            carLabels[4].setVisible(true);
+            parkSuccess("94");
+        });
 
-		occupyButtons[4] = createOccupyButton("Occupy", 498, 114);
-		occupyButtons[4].addActionListener(e -> {
-			occupyButtons[4].setVisible(false);
-			releaseButtons[4].setVisible(true);
-			carLabels[4].setVisible(true);
-			parkSuccess("05");
-		});
+        JButton btn95 = createOccupyButton("Occupy", 615, 114);
+        btn95.addActionListener(e -> {
+            btn95.setVisible(false);
+            carLabels[5].setVisible(true);
+            parkSuccess("95");
+        });
 
-		occupyButtons[5] = createOccupyButton("Occupy", 615, 114);
-		occupyButtons[5].addActionListener(e -> {
-			occupyButtons[5].setVisible(false);
-			releaseButtons[5].setVisible(true);
-			carLabels[5].setVisible(true);
-			parkSuccess("06");
-		});
+        JButton btn96 = createOccupyButton("Occupy", 732, 114);
+        btn96.addActionListener(e -> {
+            btn96.setVisible(false);
+            carLabels[6].setVisible(true);
+            parkSuccess("96");
+        });
 
-		occupyButtons[6] = createOccupyButton("Occupy", 732, 114);
-		occupyButtons[6].addActionListener(e -> {
-			occupyButtons[6].setVisible(false);
-			releaseButtons[6].setVisible(true);
-			carLabels[6].setVisible(true);
-			parkSuccess("07");
-		});
+        JButton btn97 = createOccupyButton("Occupy", 849, 114);
+        btn97.addActionListener(e -> {
+            btn97.setVisible(false);
+            carLabels[7].setVisible(true);
+            parkSuccess("97");
+        });
 
-		occupyButtons[7] = createOccupyButton("Occupy", 849, 114);
-		occupyButtons[7].addActionListener(e -> {
-			occupyButtons[7].setVisible(false);
-			releaseButtons[7].setVisible(true);
-			carLabels[7].setVisible(true);
-			parkSuccess("08");
-		});
+        occupyMap.put("90", new Object[]{btn90, carLabels[0]});
+        occupyMap.put("91", new Object[]{btn91, carLabels[1]});
+        occupyMap.put("92", new Object[]{btn92, carLabels[2]});
+        occupyMap.put("93", new Object[]{btn93, carLabels[3]});
+        occupyMap.put("94", new Object[]{btn94, carLabels[4]});
+        occupyMap.put("95", new Object[]{btn95, carLabels[5]});
+        occupyMap.put("96", new Object[]{btn96, carLabels[6]});
+        occupyMap.put("97", new Object[]{btn97, carLabels[7]});
 
-		createLabels();
+        createLabels();
+    }
 
-	}
+    private void createLabels() {
+        int lineSpacing = 117;
+        for (int i = 0; i < 8; i++) {
+            int labelNumber = 90 + i;
 
-	private void createLabels() {
-		int lineSpacing = 117;
-		for (int i = 1; i <= 8; i++) {
-			JLabel label = new JLabel(String.format("%02d", i));
-			int xPos = 70 + (i - 1) * lineSpacing;
-			label.setBounds(xPos - 10, 215, 46, 14);
-			label.setHorizontalAlignment(SwingConstants.CENTER);
-			add(label);
-		}
-	}
+            JLabel label = new JLabel(String.format("%02d", labelNumber));
+            int xPos = 70 + i * lineSpacing;
+            label.setBounds(xPos - 10, 215, 46, 14);
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            add(label);
+        }
+    }
 
-	private JLabel createCarLabels(String text, int x, int y) {
-		JLabel label = new JLabel(text);
-		label.setIcon(car);
-		label.setBounds(x, y, 107, 169);
-		label.setVisible(false);
-		add(label);
+    private JLabel createCarLabels(String text, int x, int y) {
+        JLabel label = new JLabel(text);
+        label.setIcon(car);
+        label.setBounds(x, y, 107, 169);
+        label.setVisible(false); 
+        add(label);
 
-		return label;
-	}
+        return label;
+    }
 
-	private JButton createReleaseButton(String text, int x, int y) {
-		JButton button = new JButton(text);
-		button.setBounds(x, y, 107, 30);
-		button.setFocusable(false);
-		button.setVisible(false);
-		add(button);
+    private JButton createOccupyButton(String text, int x, int y) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, 107, 30);
+        button.setFocusable(false);
+        add(button);
 
-		return button;
-	}
+        return button;
+    }
 
-	private JButton createOccupyButton(String text, int x, int y) {
-		JButton button = new JButton(text);
-		button.setBounds(x, y, 107, 30);
-		button.setFocusable(false);
-		add(button);
+    public void releaseCarGate(String slotID) {
+        if (occupyMap.containsKey(slotID)) {
+            Object[] components = occupyMap.get(slotID);
+            JButton button = (JButton) components[0];
+            JLabel label = (JLabel) components[1];
 
-		return button;
-	}
+            JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
+                    JOptionPane.INFORMATION_MESSAGE);
 
-	public void releaseCar(String slotID) {
-		int slotNumber = Integer.parseInt(slotID) - 1; // Convert slotId to index (e.g., "01" -> 0)
-		if (slotNumber >= 0 && slotNumber < releaseButtons.length) {
-			releaseButtons[slotNumber].setVisible(false);
+            button.setVisible(true);
+            label.setVisible(false);
+        }
+    }
 
-			JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
-					JOptionPane.INFORMATION_MESSAGE);
+    private void parkSuccess(String occupied) {
+        JOptionPane.showMessageDialog(null, "Successfully Parked!", "Notice!", JOptionPane.INFORMATION_MESSAGE);
+        methods.switchPanel(frame, this, frame.mainPanel);
+        frame.setOccupiedStatus(occupied);
+    }
 
-			carLabels[slotNumber].setVisible(false);
-			occupyButtons[slotNumber].setVisible(true);
-		}
-	}
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-	private void parkSuccess(String occupied) {
-		JOptionPane.showMessageDialog(null, "Successfully Parked!", "Notice!", JOptionPane.INFORMATION_MESSAGE);
-		methods.switchPanel(frame, this, frame.mainPanel);
-		frame.setOccupiedStatus(occupied);
-	}
+        Graphics2D g2d = (Graphics2D) g;
 
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawLine(25, 30, 960, 30);
 
-		Graphics2D g2d = (Graphics2D) g;
+        int line = 9;
+        int lineSpacing = 117;
 
-		g2d.setStroke(new BasicStroke(3));
-		g2d.drawLine(25, 30, 960, 30);
-
-		int line = 9;
-		int lineSpacing = 117;
-
-		for (int i = 0; i < line; i++) {
-			int xPos = 25 + i * lineSpacing;
-			g2d.drawLine(xPos, 30, xPos, 200);
-		}
-	}
+        for (int i = 0; i < line; i++) {
+            int xPos = 25 + i * lineSpacing;
+            g2d.drawLine(xPos, 30, xPos, 200);
+        }
+    }
 }

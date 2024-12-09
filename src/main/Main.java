@@ -13,15 +13,13 @@ import parkingpanel.GateParkingLayout;
 
 public class Main extends JFrame {
 	
-	public static JButton[] occupyButton = new JButton[15];
-
 	ImageIcon stiIcon = new ImageIcon(getClass().getResource("/stiIcon.png"));
 	
 	public MainPanel mainPanel = new MainPanel(this);
 	public HelpPanel helpPanel = new HelpPanel(this);
 	public History historyPanel = new History(this);
-	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this, occupyButton);
-	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this, occupyButton);
+	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this);
+	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this);
 	public ExtendedParkingLayout extendedParkingLayout = new ExtendedParkingLayout(this);
 	
 	public Main() {
@@ -53,9 +51,12 @@ public class Main extends JFrame {
 		mainPanel.occupied(occupied);
 	}
 
-	public void releaseCar(String slotID) {
-		//courtParkingLayout.releaseCar(slotID);
-		gateParkingLayout.releaseCar(slotID);
+	public void releaseCarCourt(String slotID) {
+		courtParkingLayout.releaseCar(slotID);
+	}
+	
+	public void releaseCarGate(String slotID) {
+		gateParkingLayout.releaseCarGate(slotID);
 	}
 	
 	public static void main(String[] args) {

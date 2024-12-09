@@ -279,7 +279,7 @@ public class MainPanel extends JPanel {
 				String slotID = table.getValueAt(selectedRow, 1).toString();
 
 				model.setValueAt(getCurrentTime(), selectedRow, 4);
-
+				
 				if (isRowFilled(selectedRow)) {
 					sendData(table, selectedRow);
 
@@ -317,7 +317,12 @@ public class MainPanel extends JPanel {
 	}
 
 	public void release(String slotID) {
-		main.releaseCar(slotID);
+		int slotNumber = Integer.parseInt(slotID);
+		
+		if(slotNumber >= 90 && slotNumber <= 97)
+			main.releaseCarGate(slotID);
+		else if (slotNumber >= 1 && slotNumber <= 89)
+			main.releaseCarCourt(slotID);
 	}
 
 	public String getName() {

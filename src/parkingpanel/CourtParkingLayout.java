@@ -1,15 +1,22 @@
 package parkingpanel;
 
+import java.awt.Font;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import main.Main;
 import main.Methods;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class CourtParkingLayout extends JPanel {
-	private JButton[] occupyButtons;
+	private Map<String, JButton> occupyButtons = new HashMap<>();
 
 	Main frame;
 	
@@ -21,10 +28,9 @@ public class CourtParkingLayout extends JPanel {
 	ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
 	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
 
-	public CourtParkingLayout(Main frame, JButton[] occupyButtons) {
+	public CourtParkingLayout(Main frame) {
 		this.frame = frame;
 		this.setBounds(0, 0, 986, 563);
-		this.occupyButtons = occupyButtons;
 		setLayout(null);
 
 		Image originalImage = layoutIcon.getImage();
@@ -55,32 +61,31 @@ public class CourtParkingLayout extends JPanel {
 			methods.switchPanel(frame, this, frame.extendedParkingLayout);
 		});
 		
-		occupyButtons[0] = new JButton();				//01
-		occupyButtons[0].setFocusable(false);
-		occupyButtons[0].setBounds(467, 206, 40, 21);
-		add(occupyButtons[0]);
-		occupyButtons[0].addActionListener(e -> {
-			occupyButtons[0].setVisible(false);
+		JButton btn01 = new JButton();				//01
+		btn01.setFocusable(false);
+		btn01.setBounds(467, 206, 40, 21);
+		add(btn01);
+		btn01.addActionListener(e -> {
+			btn01.setVisible(false);
 			parkSuccess("01");
 		});
+		occupyButtons.put("01", btn01);
 		
-		carLabels[0] = createCarLabels(467, 208);
-		
-		occupyButtons[1] = new JButton();				//02
-		occupyButtons[1].setFocusable(false);
-		occupyButtons[1].setBounds(467, 177, 40, 21);
-		add(occupyButtons[1]);
-		occupyButtons[1].addActionListener(e -> {
-			occupyButtons[1].setVisible(false);
+		JButton btn02 = new JButton();				//02
+		btn02.setFocusable(false);
+		btn02.setBounds(467, 177, 40, 21);
+		add(btn02);
+		btn02.addActionListener(e -> {
+			btn02.setVisible(false);
 			parkSuccess("02");
 		});
 		
-		occupyButtons[2] = new JButton();			//03
-		occupyButtons[2].setFocusable(false);
-		occupyButtons[2].setBounds(467, 147, 40, 21);
-		add(occupyButtons[2]);
-		occupyButtons[2].addActionListener(e -> {
-			occupyButtons[2].setVisible(false);
+		JButton btn03 = new JButton();			//03
+		btn03.setFocusable(false);
+		btn03.setBounds(467, 147, 40, 21);
+		add(btn03);
+		btn03.addActionListener(e -> {
+			btn03.setVisible(false);
 			parkSuccess("03");
 		});
 		
@@ -90,10 +95,6 @@ public class CourtParkingLayout extends JPanel {
 		add(button1_1_2_3);
 		
 		JButton button1_1_1 = new JButton();
-		button1_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		button1_1_1.setFocusable(false);
 		button1_1_1.setBounds(467, 118, 40, 21);
 		add(button1_1_1);
@@ -113,25 +114,30 @@ public class CourtParkingLayout extends JPanel {
 		button1_1_3.setBounds(556, 206, 40, 21);
 		add(button1_1_3);
 		
-		JButton button1_1_1_1 = new JButton();
-		button1_1_1_1.setFocusable(false);
-		button1_1_1_1.setBounds(556, 147, 40, 21);
-		add(button1_1_1_1);
+		JButton btn09 = new JButton();
+		btn09.setFocusable(false);
+		btn09.setBounds(556, 147, 40, 21);
+		add(btn09);
+		btn09.addActionListener(e -> {
+			btn09.setVisible(false);
+			parkSuccess("09");
+		});
+		occupyButtons.put("09", btn09);
 		
-		JButton button1_2_1 = new JButton();
-		button1_2_1.setFocusable(false);
-		button1_2_1.setBounds(556, 176, 40, 21);
-		add(button1_2_1);
+		JButton btn08 = new JButton();
+		btn08.setFocusable(false);
+		btn08.setBounds(556, 176, 40, 21);
+		add(btn08);
+		btn08.addActionListener(e -> {
+			btn08.setVisible(false);
+			parkSuccess("08");
+		});
+		occupyButtons.put("08", btn08);
 		
 		JButton button1_1_2_1 = new JButton();
 		button1_1_2_1.setFocusable(false);
 		button1_1_2_1.setBounds(556, 118, 40, 21);
 		add(button1_1_2_1);
-		
-		JButton button1_3_1 = new JButton();
-		button1_3_1.setFocusable(false);
-		button1_3_1.setBounds(556, 147, 40, 21);
-		add(button1_3_1);
 		
 		JButton button1_1_4 = new JButton();
 		button1_1_4.setFocusable(false);
@@ -501,6 +507,19 @@ public class CourtParkingLayout extends JPanel {
 		btnNewButton_2_1_4_1_1_1_1_1.setBounds(232, 358, 22, 69);
 		add(btnNewButton_2_1_4_1_1_1_1_1);
 		
+//		// Assuming occupyButtons is a HashMap<String, JButton> and the buttons are btn01, btn02, etc.
+//		for (int i = 1; i <= 89; i++) {
+//		    // Format the slot number to be two digits (01, 02, 03, ...)
+//		    String slotID = String.format("%02d", i);
+//		    
+//		    // Dynamically create the button variable name (btn01, btn02, btn03, ...)
+//		    JButton button = new JButton("Button " + slotID); // Replace with actual button creation logic if necessary
+//		    
+//		    // Add the slotID and button to the occupyButtons map
+//		    occupyButtons.put(slotID, button);
+//		}
+
+		
 		JLabel lblLayout = new JLabel(scaledIcon);
 		lblLayout.setBounds(0, 0, 986, 563);
 		add(lblLayout);
@@ -516,15 +535,20 @@ public class CourtParkingLayout extends JPanel {
 	}
 	
 	public void releaseCar(String slotID) {
-		int slotNumber = Integer.parseInt(slotID) - 1; // Convert slotId to index (e.g., "01" -> 0)
-		if (slotNumber >= 0) {
-			JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
-					JOptionPane.INFORMATION_MESSAGE);
-
-			occupyButtons[slotNumber].setVisible(true);
-		}
+	    // Check if the slot ID exists in the HashMap
+	    if (occupyButtons.containsKey(slotID)) {
+	        // Access the button using the slot ID
+	        JButton button = occupyButtons.get(slotID);
+	        
+	        // Show a message dialog indicating the car has been released
+	        JOptionPane.showMessageDialog(null, "Slot " + slotID + " is now released!", "Notice!",
+	                JOptionPane.INFORMATION_MESSAGE);
+	        
+	        // Make the button visible again
+	        button.setVisible(true);
+	    }
 	}
-	
+
 	private void parkSuccess(String occupied) {
 		JOptionPane.showMessageDialog(null, "Successfully Parked!", "Notice!", JOptionPane.INFORMATION_MESSAGE);
 		methods.switchPanel(frame, this, frame.mainPanel);
