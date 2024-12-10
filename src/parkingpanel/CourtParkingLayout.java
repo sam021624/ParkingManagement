@@ -24,6 +24,7 @@ public class CourtParkingLayout extends JPanel {
 	private JLabel[] motorLabels = new JLabel[89];
 
 	ImageIcon motorcycleIcon = new ImageIcon((getClass().getResource("/motorcycle.png")));
+	ImageIcon motorIcon = new ImageIcon((getClass().getResource("/motorIcon.png")));
 	ImageIcon layoutIcon = new ImageIcon(getClass().getResource("/layout.png"));
 	ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
 	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
@@ -35,8 +36,8 @@ public class CourtParkingLayout extends JPanel {
 
 		Image originalImage = layoutIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(966, 541, Image.SCALE_SMOOTH); 
-		ImageIcon scaledIcon = new ImageIcon(scaledImage); 
-
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		
 		JButton btnBack = new JButton(backIcon);
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnBack.setText("back");
@@ -81,14 +82,14 @@ public class CourtParkingLayout extends JPanel {
 		motorLabels[17] = createMotorLabels(602, 89);
 		motorLabels[18] = createMotorLabels(602, 60);
 		motorLabels[19] = createMotorLabels(602, 31);
-		motorLabels[20] = createMotorLabels(689, 33);
-		motorLabels[21] = createMotorLabels(721, 33);
-		motorLabels[22] = createMotorLabels(753, 33);
-		motorLabels[23] = createMotorLabels(785, 33);
-		motorLabels[24] = createMotorLabels(782, 177);
-		motorLabels[25] = createMotorLabels(750, 177);
-		motorLabels[26] = createMotorLabels(719, 177);
-		motorLabels[27] = createMotorLabels(687, 177);
+		motorLabels[20] = createMotorpLabels(689, 33);
+		motorLabels[21] = createMotorpLabels(721, 33);
+		motorLabels[22] = createMotorpLabels(753, 33);
+		motorLabels[23] = createMotorpLabels(785, 33);
+		motorLabels[24] = createMotorpLabels(782, 177);
+		motorLabels[25] = createMotorpLabels(750, 177);
+		motorLabels[26] = createMotorpLabels(719, 177);
+		motorLabels[27] = createMotorpLabels(687, 177);
 		motorLabels[28] = createMotorLabels(453, 505);
 		motorLabels[29] = createMotorLabels(453, 476);
 		motorLabels[30] = createMotorLabels(453, 447);
@@ -119,16 +120,16 @@ public class CourtParkingLayout extends JPanel {
 		motorLabels[55] = createMotorLabels(744, 418);
 		motorLabels[56] = createMotorLabels(744, 387);
 		motorLabels[57] = createMotorLabels(744, 358);
-		motorLabels[58] = createMotorLabels(827, 488);
-		motorLabels[59] = createMotorLabels(859, 488);
-		motorLabels[60] = createMotorLabels(889, 488);
-		motorLabels[61] = createMotorLabels(920, 488);
-		motorLabels[62] = createMotorLabels(920, 370);
-		motorLabels[63] = createMotorLabels(889, 370);
-		motorLabels[64] = createMotorLabels(859, 370);
-		motorLabels[65] = createMotorLabels(827, 370);
-		motorLabels[66] = createMotorLabels(920, 214);
-		motorLabels[67] = createMotorLabels(889, 214);
+		motorLabels[58] = createMotorpLabels(827, 488);
+		motorLabels[59] = createMotorpLabels(859, 488);
+		motorLabels[60] = createMotorpLabels(889, 488);
+		motorLabels[61] = createMotorpLabels(920, 488);
+		motorLabels[62] = createMotorpLabels(920, 370);
+		motorLabels[63] = createMotorpLabels(889, 370);
+		motorLabels[64] = createMotorpLabels(859, 370);
+		motorLabels[65] = createMotorpLabels(827, 370);
+		motorLabels[66] = createMotorpLabels(920, 214);
+		motorLabels[67] = createMotorpLabels(889, 214);
 		motorLabels[68] = createMotorLabels(403, 505);
 		motorLabels[69] = createMotorLabels(403, 476);
 		motorLabels[70] = createMotorLabels(403, 447);
@@ -141,15 +142,15 @@ public class CourtParkingLayout extends JPanel {
 		motorLabels[77] = createMotorLabels(318, 416);
 		motorLabels[78] = createMotorLabels(318, 387);
 		motorLabels[79] = createMotorLabels(318, 358);
-		motorLabels[80] = createMotorLabels(333, 31);
-		motorLabels[81] = createMotorLabels(300, 31);
-		motorLabels[82] = createMotorLabels(266, 31);
-		motorLabels[83] = createMotorLabels(232, 358);
-		motorLabels[84] = createMotorLabels(73, 72);
-		motorLabels[85] = createMotorLabels(37, 72);
-		motorLabels[86] = createMotorLabels(106, 401);
-		motorLabels[87] = createMotorLabels(70, 401);
-		motorLabels[88] = createMotorLabels(34, 401);
+		motorLabels[80] = createMotorpLabels(333, 31);
+		motorLabels[81] = createMotorpLabels(300, 31);
+		motorLabels[82] = createMotorpLabels(266, 31);
+		motorLabels[83] = createMotorpLabels(232, 358);
+		motorLabels[84] = createMotorpLabels(73, 72);
+		motorLabels[85] = createMotorpLabels(37, 72);
+		motorLabels[86] = createMotorpLabels(106, 401);
+		motorLabels[87] = createMotorpLabels(70, 401);
+		motorLabels[88] = createMotorpLabels(34, 401);
 
 		JButton btn01 = new JButton();				
 		btn01.setFocusable(false);
@@ -1152,7 +1153,6 @@ public class CourtParkingLayout extends JPanel {
 		    parkSuccess("89");
 		});
 
-
 		JLabel lblLayout = new JLabel(scaledIcon);
 		lblLayout.setBounds(0, 0, 986, 563);
 		add(lblLayout);
@@ -1248,8 +1248,8 @@ public class CourtParkingLayout extends JPanel {
 		occupyButtons.put("89", new Object[] {btn88, motorLabels[88]});
 	}
 	
-	private JLabel createMotorLabels(int x, int y) {
-	    Image originalImage = motorcycleIcon.getImage();
+	private JLabel createMotorLabels(int x, int y) {		//horizontal motor icon
+	    Image originalImage = motorcycleIcon.getImage();	
 	    Image scaledImage = originalImage.getScaledInstance(40, 21, Image.SCALE_SMOOTH); 
 	    ImageIcon scaledIcon = new ImageIcon(scaledImage); 
 
@@ -1262,6 +1262,36 @@ public class CourtParkingLayout extends JPanel {
 	    return label;
 	}
 	
+	private JLabel createMotorpLabels(int x, int y) {
+	    Image originalImage = motorIcon.getImage();
+	    int originalWidth = originalImage.getWidth(null);
+	    int originalHeight = originalImage.getHeight(null);
+
+	    double widthRatio = 20.9 / originalWidth;
+	    double heightRatio = 36.9 / originalHeight;
+
+	    double scaleFactor = Math.min(widthRatio, heightRatio);
+
+	    int newWidth = (int) (originalWidth * scaleFactor);
+	    int newHeight = (int) (originalHeight * scaleFactor);
+
+	    Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+	    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+	    JLabel label = new JLabel();
+	    label.setIcon(scaledIcon);
+
+	    int xOffset = (22 - newWidth) / 2;  // Center horizontally
+	    int yOffset = (38 - newHeight) / 2; // Center vertically
+	    label.setBounds(x + xOffset, y + yOffset, newWidth, newHeight);
+
+	    label.setVisible(false);
+
+	    add(label);
+
+	    return label;
+	}
+
 	public void releaseCar(String slotID) {
 	    if (occupyButtons.containsKey(slotID)) {
 	    	Object[] components = occupyButtons.get(slotID);

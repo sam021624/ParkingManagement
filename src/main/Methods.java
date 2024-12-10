@@ -22,8 +22,7 @@ public class Methods {
 		frame.repaint();
 	}
 
-	public void registerInfo(int studentID, String category, String studentName, String studentLastName,
-			String plateNumber) {
+	public void registerInfo(int studentID, String category, String studentName, String studentLastName, String plateNumber) {
 		String url = "jdbc:mysql://localhost:3306/studentdatabase";
 
 		// STUDENT ID, FIRST NAME, LAST NAME, PLATE NUMBER
