@@ -81,60 +81,28 @@ public class GateParkingLayout extends JPanel {
         
         // BUTTON OCCUPY
         JButton btn90 = createOccupyButton("Occupy", 30, 114);
-        btn90.addActionListener(e -> {
-            btn90.setVisible(false);
-            carLabels[0].setVisible(true);
-            parkSuccess("90");
-        });
+        parkingValidation(btn90, 0, "90");
 
         JButton btn91 = createOccupyButton("Occupy", 147, 114);
-        btn91.addActionListener(e -> {
-            btn91.setVisible(false);
-            carLabels[1].setVisible(true);
-            parkSuccess("91");
-        });
+        parkingValidation(btn91, 1, "91");
 
         JButton btn92 = createOccupyButton("Occupy", 264, 114);
-        btn92.addActionListener(e -> {
-            btn92.setVisible(false);
-            carLabels[2].setVisible(true);
-            parkSuccess("92");
-        });
+        parkingValidation(btn92, 2, "92");
 
         JButton btn93 = createOccupyButton("Occupy", 381, 114);
-        btn93.addActionListener(e -> {
-            btn93.setVisible(false);
-            carLabels[3].setVisible(true);
-            parkSuccess("93");
-        });
-
+        parkingValidation(btn93, 3, "93");
+        
         JButton btn94 = createOccupyButton("Occupy", 498, 114);
-        btn94.addActionListener(e -> {
-            btn94.setVisible(false);
-            carLabels[4].setVisible(true);
-            parkSuccess("94");
-        });
-
+        parkingValidation(btn94, 4, "94");
+        
         JButton btn95 = createOccupyButton("Occupy", 615, 114);
-        btn95.addActionListener(e -> {
-            btn95.setVisible(false);
-            carLabels[5].setVisible(true);
-            parkSuccess("95");
-        });
+        parkingValidation(btn95, 5, "95");        
 
         JButton btn96 = createOccupyButton("Occupy", 732, 114);
-        btn96.addActionListener(e -> {
-            btn96.setVisible(false);
-            carLabels[6].setVisible(true);
-            parkSuccess("96");
-        });
+        parkingValidation(btn96, 6, "96");
 
         JButton btn97 = createOccupyButton("Occupy", 849, 114);
-        btn97.addActionListener(e -> {
-            btn97.setVisible(false);
-            carLabels[7].setVisible(true);
-            parkSuccess("97");
-        });
+        parkingValidation(btn97, 7, "97");
 
         occupyButtons.put("90", new Object[]{btn90, carLabels[0]});
         occupyButtons.put("91", new Object[]{btn91, carLabels[1]});
@@ -148,6 +116,22 @@ public class GateParkingLayout extends JPanel {
         buttons = new JButton[] {btn90,btn91,btn92,btn93,btn94,btn95,btn96,btn97};
         enableButtons(buttons);
         createLabels();
+    }
+    
+    private void parkingValidation(JButton button, int labelIndex, String slot) {
+	    button.addActionListener(e -> {
+	        int choice = JOptionPane.showConfirmDialog(
+	            null,
+	            "Are you sure you want to park in slot " + slot + "?",
+	            "Notice!",
+	            JOptionPane.YES_NO_OPTION
+	        );
+	        if (choice == JOptionPane.YES_OPTION) {
+	            button.setVisible(false);
+	            carLabels[labelIndex].setVisible(true);
+	            parkSuccess(slot);
+	        }
+	    });
     }
 
     private void createLabels() {
