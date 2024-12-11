@@ -2,13 +2,11 @@ package main;
 
 import javax.swing.ImageIcon;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import helpPanel.HelpPanel;
 import history.History;
 import parkingpanel.CourtParkingLayout;
-import parkingpanel.ExtendedParkingLayout;
 import parkingpanel.GateParkingLayout;
 
 public class Main extends JFrame {
@@ -20,7 +18,6 @@ public class Main extends JFrame {
 	public History historyPanel = new History(this);
 	public GateParkingLayout gateParkingLayout = new GateParkingLayout(this);
 	public CourtParkingLayout courtParkingLayout = new CourtParkingLayout(this);
-	public ExtendedParkingLayout extendedParkingLayout = new ExtendedParkingLayout(this);
 	
 	public Main() {
 		getContentPane().add(mainPanel);

@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ public class GateParkingLayout extends JPanel {
     ImageIcon car = new ImageIcon((getClass().getResource("/carvertical.png")));
     ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
     ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
+    ImageIcon homeIcon = new ImageIcon((getClass().getResource("/home.png")));
 
     Main frame;
     MainPanel mainPanel = new MainPanel(frame);
@@ -57,25 +60,23 @@ public class GateParkingLayout extends JPanel {
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.setFocusable(false);
-        btnBack.setBounds(10, 323, 78, 23);
+        btnBack.setBounds(10, 300, 78, 23);
         add(btnBack);
         btnBack.addActionListener(e -> {
             mainPanel.resetFields();
-            methods.switchPanel(frame, this, frame.mainPanel);
-        });
-
-        JButton btnNext = new JButton("next", nextIcon);
-        btnNext.setFont(new Font("Tahoma", Font.BOLD, 10));
-        btnNext.setContentAreaFilled(false);
-        btnNext.setBorderPainted(false);
-        btnNext.setFocusable(false);
-        btnNext.setBounds(898, 323, 78, 23);
-        btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
-        add(btnNext);
-        btnNext.addActionListener(e -> {
             methods.switchPanel(frame, this, frame.courtParkingLayout);
         });
-
+        
+        JLabel lblHome = new JLabel(homeIcon);
+        lblHome.setBounds(330, 460, 333, 92);
+        add(lblHome);
+        lblHome.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		methods.switchPanel(frame, frame.gateParkingLayout, frame.mainPanel);
+        	}
+        });
+        
         // BUTTON OCCUPY
         JButton btn90 = createOccupyButton("Occupy", 30, 114);
         btn90.addActionListener(e -> {

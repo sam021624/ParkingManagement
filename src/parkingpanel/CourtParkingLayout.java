@@ -44,10 +44,10 @@ public class CourtParkingLayout extends JPanel {
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setFocusable(false);
-		btnBack.setBounds(10, 323, 78, 23);
+		btnBack.setBounds(10, 300, 78, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.gateParkingLayout);
+			methods.switchPanel(frame, this, frame.mainPanel);
 		});
 		
 		JButton btnNext = new JButton("next", nextIcon);
@@ -55,11 +55,11 @@ public class CourtParkingLayout extends JPanel {
 		btnNext.setContentAreaFilled(false);
 		btnNext.setBorderPainted(false);
 		btnNext.setFocusable(false);
-		btnNext.setBounds(898, 323, 78, 23);
+		btnNext.setBounds(898, 300, 78, 23);
 		btnNext.setHorizontalTextPosition(SwingConstants.LEFT);
 		add(btnNext);
 		btnNext.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.extendedParkingLayout);
+			methods.switchPanel(frame, this, frame.gateParkingLayout);
 		});
 		
 		motorLabels[0] = createMotorLabels(467, 206);

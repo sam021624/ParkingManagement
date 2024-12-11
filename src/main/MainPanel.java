@@ -200,7 +200,7 @@ public class MainPanel extends JPanel {
 		btnMap.setBounds(38, 124, 103, 35);
 		pnlOperation.add(btnMap);
 		btnMap.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.gateParkingLayout);
+			methods.switchPanel(frame, this, frame.courtParkingLayout);
 		});
 
 		JButton btnHistory = new JButton("📜 History");
@@ -228,7 +228,7 @@ public class MainPanel extends JPanel {
 
 				tableModel.addRow(new Object[] { studentID, license, null, getCurrentTime(), null });
 
-				methods.switchPanel(frame, this, frame.gateParkingLayout);
+				methods.switchPanel(frame, this, frame.courtParkingLayout);
 				resetFields();
 				this.revalidate();
 				this.repaint();

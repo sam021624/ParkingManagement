@@ -53,7 +53,7 @@ public class History extends JPanel {
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
 		btnBack.setFocusable(false);
-		btnBack.setBounds(898, 323, 78, 23);
+		btnBack.setBounds(898, 300, 78, 23);
 		add(btnBack);
 		btnBack.addActionListener(e -> {
 			methods.switchPanel(frame, this, frame.mainPanel);
