@@ -10,7 +10,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import addInfo.StudentInfo;
+import parkingpanel.CourtParkingLayout;
 
 public class MainPanel extends JPanel {
 	Main main;
@@ -37,6 +48,9 @@ public class MainPanel extends JPanel {
 
 	Date currentDate = new Date();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM-dd-yyyy");
+	
+	JLabel lblTotal;
+	int totalCars = 0;
 
 	public MainPanel(Main frame) {
 		this.main = frame;
@@ -101,7 +115,7 @@ public class MainPanel extends JPanel {
 		pnlParking.add(lblID);
 
 		IDtextField = new JTextField();
-		IDtextField.setText("");
+		IDtextField.setText("2000");
 		IDtextField.setColumns(10);
 		IDtextField.setBounds(155, 55, 159, 29);
 		pnlParking.add(IDtextField);
@@ -127,11 +141,17 @@ public class MainPanel extends JPanel {
 		comboBoxCategory.addItem("Visitor");
 		comboBoxCategory.setSelectedIndex(-1);
 		pnlParking.add(comboBoxCategory);
-		if (comboBoxCategory.getSelectedIndex() == 2) {
-			IDtextField.setEditable(false);
-			IDtextField.setFocusable(false);
-		} else
-			IDtextField.setEditable(true);
+		comboBoxCategory.addActionListener(e -> {
+			if (comboBoxCategory.getSelectedIndex() == 2) {
+				IDtextField.setText("VISITOR");
+				IDtextField.setFocusable(false);
+				IDtextField.setEditable(false);
+			}
+			else {
+				IDtextField.setFocusable(true);
+				IDtextField.setEditable(true);
+			}
+		});
 
 		JLabel registerLabel = new JLabel("-> ID not found? Click here");
 		registerLabel.setBounds(165, 83, 149, 14);
@@ -152,9 +172,14 @@ public class MainPanel extends JPanel {
 				registerLabel.setForeground(Color.black);
 			}
 		});
+		
+		lblTotal = new JLabel("Total Parked Cars: " + totalCars);
+		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTotal.setBounds(857, 208, 119, 13);
+		add(lblTotal);
 
 		JPanel pnlCars = new JPanel();
-		TitledBorder border2 = new TitledBorder(null, "Parked Car's", TitledBorder.LEADING, TitledBorder.TOP,
+		TitledBorder border2 = new TitledBorder(null, "Parked Today", TitledBorder.LEADING, TitledBorder.TOP,
 				new Font("Cambria Math", Font.BOLD, 20), SystemColor.textHighlight);
 		pnlCars.setBorder(border2);
 		pnlCars.setBounds(572, 231, 404, 322);
@@ -221,21 +246,7 @@ public class MainPanel extends JPanel {
 		btnPark.setFocusable(false);
 		btnPark.setBounds(38, 35, 103, 35);
 		pnlOperation.add(btnPark);
-		btnPark.addActionListener(e -> {
-			if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
-				String studentID = getStudentID();
-				String license = getPlateNumber();
-
-				tableModel.addRow(new Object[] { studentID, license, null, getCurrentTime(), null });
-
-				methods.switchPanel(frame, this, frame.courtParkingLayout);
-				resetFields();
-				this.revalidate();
-				this.repaint();
-			} else {
-				JOptionPane.showMessageDialog(null, "Try again");
-			}
-		});
+		btnPark.addActionListener(e -> handleParking());
 
 		JLabel lblLogo = new JLabel(stiIcon);
 		lblLogo.setBounds(10, 10, 317, 202);
@@ -248,17 +259,7 @@ public class MainPanel extends JPanel {
 		add(pnlExport);
 		pnlExport.setLayout(null);
 
-		JButton btnHelp = new JButton(helpIcon);
-		btnHelp.setBorderPainted(false);
-		btnHelp.setContentAreaFilled(false);
-		btnHelp.setFocusable(false);
-		btnHelp.setBounds(937, 190, 39, 30);
-		add(btnHelp);
-		btnHelp.addActionListener(e -> {
-			methods.switchPanel(frame, this, frame.helpPanel);
-		});
-
-		JButton btnExport = new JButton("💾 Export");
+		JButton btnExport = new JButton("💾 PDF");
 		btnExport.setBounds(38, 30, 103, 35);
 		pnlExport.add(btnExport);
 		btnExport.addActionListener(e -> {
@@ -268,27 +269,52 @@ public class MainPanel extends JPanel {
 		timer.start();
 	}
 
+	private void handleParking() {
+		if (!getName().isEmpty() && getCategory() && !getPlateNumber().isEmpty()) {
+			String studentID = getStudentID();
+			String license = getPlateNumber();
+
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			model.addRow(new Object[] {studentID, license, null, getCurrentTime(), null });
+
+			methods.switchPanel(main, this, main.courtParkingLayout);
+			resetFields();
+			
+			main.addtotalCars();
+			
+			this.revalidate();
+			this.repaint();
+		} else 
+			JOptionPane.showMessageDialog(null, "Please fill out all the fields");
+	}
+
 	private void handleRelease() {
-		int selectedRow = table.getSelectedRow();
-		if (selectedRow != -1) {
-			int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
-					"Confirmation", JOptionPane.YES_NO_OPTION);
+		try {
+			int selectedRow = table.getSelectedRow();
+			if (selectedRow != -1) {
+				int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to perform this action?",
+						"Confirmation", JOptionPane.YES_NO_OPTION);
 
-			if (choice == JOptionPane.YES_OPTION) {
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				String slotID = table.getValueAt(selectedRow, 1).toString();
+				if (choice == JOptionPane.YES_OPTION) {
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					String slotID = table.getValueAt(selectedRow, 1).toString();
 
-				model.setValueAt(getCurrentTime(), selectedRow, 4);
-				
-				if (isRowFilled(selectedRow)) {
-					sendData(table, selectedRow);
+					model.setValueAt(getCurrentTime(), selectedRow, 4);
 
-					release(slotID);
-				} else {
-					JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
+					if (isRowFilled(selectedRow)) {
+						sendData(table, selectedRow);
+						
+						release(slotID);
+						main.minustotalCars();
+					} else {
+						JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
+					}
 				}
-			}
+			}	
+		} catch(NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Please ensure all fields in the selected row are filled.");
 		}
+
 	}
 
 	private String getStudentID() {
@@ -296,7 +322,7 @@ public class MainPanel extends JPanel {
 	}
 
 	public void resetFields() {
-		IDtextField.setText("");
+		IDtextField.setText("2000");
 		nameTextField.setText("");
 		plateTextField.setText("");
 		comboBoxCategory.setSelectedIndex(-1);
@@ -318,29 +344,31 @@ public class MainPanel extends JPanel {
 
 	public void release(String slotID) {
 		int slotNumber = Integer.parseInt(slotID);
-		
-		if(slotNumber >= 90 && slotNumber <= 97)
+
+		if (slotNumber >= 90 && slotNumber <= 97)
 			main.releaseCarGate(slotID);
 		else if (slotNumber >= 1 && slotNumber <= 89)
 			main.releaseCarCourt(slotID);
+		
+		
 	}
 
 	public String getName() {
 		return nameTextField.getText();
 	}
 
-	public boolean getCategory() {
-		if (comboBoxCategory.getSelectedIndex() == 0 || comboBoxCategory.getSelectedIndex() == 1)
+	private boolean getCategory() {
+		if(comboBoxCategory.getSelectedIndex() == 0 || comboBoxCategory.getSelectedIndex() == 1 || comboBoxCategory.getSelectedIndex() == 2)
 			return true;
 		else
 			return false;
 	}
 
-	public String getPlateNumber() {
+	private String getPlateNumber() {
 		return plateTextField.getText();
 	}
 
-	public String getCurrentTime() {
+	private String getCurrentTime() {
 		LocalDateTime currentTime = LocalDateTime.now();
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss a");
 		String time = currentTime.format(timeFormat);
@@ -370,9 +398,19 @@ public class MainPanel extends JPanel {
 
 		main.updateTableData(rowData);
 	}
-
-	public int getSelectedRow() {
-		return table.getSelectedRow();
+	
+	public void sendTable(JTable table) {
+		CourtParkingLayout courtParkingLayout = new CourtParkingLayout(main);
+		//courtParkingLayout.getTable(table);
 	}
-
+	
+	public void addtotalCars() {
+		totalCars++;
+		lblTotal.setText("Total Parked Cars: " + totalCars);
+	}
+	
+	public void minustotalCars(){
+		totalCars--;
+		lblTotal.setText("Total Parked Cars: " + totalCars);
+	}
 }

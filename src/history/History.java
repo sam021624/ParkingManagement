@@ -63,7 +63,7 @@ public class History extends JPanel {
 		scrollPane.setBounds(10, 95, 966, 457);
 		add(scrollPane);
 
-		String[] columnNames = { "Student ID", "License Plate", "Occupied", "Time Parked", "Time Released", "Date" };
+		String[] columnNames = {"ID", "License Plate", "Occupied", "Time Parked", "Time Released", "Date" };
 		targetModel = new DefaultTableModel(null, columnNames) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // editable to false

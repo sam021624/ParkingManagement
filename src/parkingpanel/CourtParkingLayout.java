@@ -10,7 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import main.Main;
 import main.Methods;
@@ -152,7 +154,7 @@ public class CourtParkingLayout extends JPanel {
 		motorLabels[87] = createMotorpLabels(70, 401);
 		motorLabels[88] = createMotorpLabels(34, 401);
 
-		JButton btn01 = new JButton();				
+		JButton btn01 = new JButton();
 		btn01.setFocusable(false);
 		btn01.setBounds(467, 206, 40, 21);
 		add(btn01);
@@ -1310,5 +1312,10 @@ public class CourtParkingLayout extends JPanel {
 		JOptionPane.showMessageDialog(null, "Successfully Parked!", "Notice!", JOptionPane.INFORMATION_MESSAGE);
 		methods.switchPanel(frame, this, frame.mainPanel);
 		frame.setOccupiedStatus(occupied);
+	}
+	
+	public void getTable(JTable table) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		System.out.println(model.getRowCount());
 	}
 }

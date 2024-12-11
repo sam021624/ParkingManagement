@@ -1,8 +1,8 @@
 package main;
 
 import javax.swing.ImageIcon;
-
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import helpPanel.HelpPanel;
 import history.History;
@@ -24,11 +24,28 @@ public class Main extends JFrame {
 
 		this.setTitle("Parking Management System");
 		this.setIconImage(stiIcon.getImage());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setResizable(false);
 		this.getContentPane().setLayout(null);
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
+
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				int response = JOptionPane.showConfirmDialog(
+					Main.this, 
+					"Are you sure you want to exit?", 
+					"Confirm Exit", 
+					JOptionPane.YES_NO_OPTION, 
+					JOptionPane.QUESTION_MESSAGE
+				);
+				if (response == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
+		
 		this.setVisible(true);
 	}
 	
@@ -47,7 +64,15 @@ public class Main extends JFrame {
 	public void setOccupiedStatus(String occupied) {
 		mainPanel.occupied(occupied);
 	}
+	
+	public void addtotalCars() {
+		mainPanel.addtotalCars();
+	}
 
+	public void minustotalCars() {
+		mainPanel.minustotalCars();
+	}
+	
 	public void releaseCarCourt(String slotID) {
 		courtParkingLayout.releaseCar(slotID);
 	}
