@@ -73,6 +73,11 @@ public class Main extends JFrame {
 		mainPanel.minustotalCars();
 	}
 	
+	public void buttonState(boolean status) {
+		courtParkingLayout.buttonState(status);
+		gateParkingLayout.buttonState(status);
+	}
+	
 	public void releaseCarCourt(String slotID) {
 		courtParkingLayout.releaseCar(slotID);
 	}

@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -51,6 +53,8 @@ public class MainPanel extends JPanel {
 	
 	JLabel lblTotal;
 	int totalCars = 0;
+	
+	boolean status;
 
 	public MainPanel(Main frame) {
 		this.main = frame;
@@ -194,6 +198,15 @@ public class MainPanel extends JPanel {
 				return false; // editable to false
 			}
 		};
+		tableModel.addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if(e.getType() == TableModelEvent.INSERT) {
+					status = true;
+					main.buttonState(status);
+				}
+			}
+		});
 
 		table = new JTable(tableModel);
 		table.setFillsViewportHeight(true);
@@ -349,8 +362,6 @@ public class MainPanel extends JPanel {
 			main.releaseCarGate(slotID);
 		else if (slotNumber >= 1 && slotNumber <= 89)
 			main.releaseCarCourt(slotID);
-		
-		
 	}
 
 	public String getName() {
@@ -399,9 +410,8 @@ public class MainPanel extends JPanel {
 		main.updateTableData(rowData);
 	}
 	
-	public void sendTable(JTable table) {
-		CourtParkingLayout courtParkingLayout = new CourtParkingLayout(main);
-		//courtParkingLayout.getTable(table);
+	public void buttonState(boolean status) {
+		this.status = status;
 	}
 	
 	public void addtotalCars() {

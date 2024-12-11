@@ -32,6 +32,8 @@ public class GateParkingLayout extends JPanel {
 
     private Map<String, Object[]> occupyButtons = new HashMap<>();
     private JLabel[] carLabels = new JLabel[8];
+    private boolean status;
+    private JButton[] buttons;
 
     public GateParkingLayout(Main frame) {
         this.frame = frame;
@@ -143,6 +145,8 @@ public class GateParkingLayout extends JPanel {
         occupyButtons.put("96", new Object[]{btn96, carLabels[6]});
         occupyButtons.put("97", new Object[]{btn97, carLabels[7]});
 
+        buttons = new JButton[] {btn90,btn91,btn92,btn93,btn94,btn95,btn96,btn97};
+        enableButtons(buttons);
         createLabels();
     }
 
@@ -191,13 +195,29 @@ public class GateParkingLayout extends JPanel {
             label.setVisible(false);
         }
     }
+    
+	private void enableButtons(JButton[] button) {
+		for (JButton btn : button) {
+			btn.setEnabled(status); 
+		}
+
+	}
+
+	public void buttonState(boolean status) {
+		this.status = status;
+		enableButtons(buttons);
+	}
 
     private void parkSuccess(String occupied) {
+    	this.status = false;
+    	enableButtons(buttons);
+    	frame.buttonState(status);
         JOptionPane.showMessageDialog(null, "Successfully Parked!", "Notice!", JOptionPane.INFORMATION_MESSAGE);
         methods.switchPanel(frame, this, frame.mainPanel);
         frame.setOccupiedStatus(occupied);
     }
 
+	
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
