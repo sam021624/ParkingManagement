@@ -33,10 +33,10 @@ public class CourtParkingLayout extends JPanel {
 	ImageIcon layoutIcon = new ImageIcon(getClass().getResource("/layout.png"));
 	ImageIcon backIcon = new ImageIcon((getClass().getResource("/back.png")));
 	ImageIcon nextIcon = new ImageIcon((getClass().getResource("/next.png")));
-	
 
 	JButton buttons[];
 
+	@SuppressWarnings("unused")
 	public CourtParkingLayout(Main frame) {
 		this.frame = frame;
 		this.setBounds(0, 0, 986, 563);
@@ -161,1005 +161,272 @@ public class CourtParkingLayout extends JPanel {
 		motorLabels[88] = createMotorpLabels(34, 401);
 
 		JButton btn01 = new JButton();
-		btn01.setFocusable(false);
-		btn01.setBounds(467, 206, 40, 21);
-		add(btn01);
-		btn01.addActionListener(e -> {
-			btn01.setVisible(false);
-			motorLabels[0].setVisible(true);
-			parkSuccess("01");
-		});
+		parkingValidation(btn01, 467, 206, 40, 21, 0, "01");
 
 		JButton btn02 = new JButton();
-		btn02.setFocusable(false);
-		btn02.setBounds(467, 177, 40, 21);
-		add(btn02);
-		btn02.addActionListener(e -> {
-			btn02.setVisible(false);
-			motorLabels[1].setVisible(true);
-			parkSuccess("02");
-		});
+		parkingValidation(btn02, 467, 177, 40, 21, 1, "02");
 
 		JButton btn03 = new JButton();
-		btn03.setFocusable(false);
-		btn03.setBounds(467, 147, 40, 21);
-		add(btn03);
-		btn03.addActionListener(e -> {
-			btn03.setVisible(false);
-			motorLabels[2].setVisible(true);
-			parkSuccess("03");
-		});
+		parkingValidation(btn03, 467, 147, 40, 21, 2, "03");
 
 		JButton btn04 = new JButton();
-		btn04.setFocusable(false);
-		btn04.setBounds(467, 118, 40, 21);
-		add(btn04);
-		btn04.addActionListener(e -> {
-			btn04.setVisible(false);
-			motorLabels[3].setVisible(true);
-			parkSuccess("04");
-		});
+		parkingValidation(btn04, 467, 118, 40, 21, 3, "04");
 
 		JButton btn05 = new JButton();
-		btn05.setFocusable(false);
-		btn05.setBounds(467, 89, 40, 21);
-		add(btn05);
-		btn05.addActionListener(e -> {
-			btn05.setVisible(false);
-			motorLabels[4].setVisible(true);
-			parkSuccess("05");
-		});
+		parkingValidation(btn05, 467, 89, 40, 21, 4, "05");
 
 		JButton btn06 = new JButton();
-		btn06.setFocusable(false);
-		btn06.setBounds(467, 60, 40, 21);
-		add(btn06);
-		btn06.addActionListener(e -> {
-			btn06.setVisible(false);
-			motorLabels[5].setVisible(true);
-			parkSuccess("06");
-		});
+		parkingValidation(btn06, 467, 60, 40, 21, 5, "06");
 
 		JButton btn07 = new JButton();
-		btn07.setFocusable(false);
-		btn07.setBounds(556, 206, 40, 21);
-		add(btn07);
-		btn07.addActionListener(e -> {
-			btn07.setVisible(false);
-			motorLabels[6].setVisible(true);
-			parkSuccess("07");
-		});
-
+		parkingValidation(btn07, 556, 206, 40, 21, 6, "07");
+		
 		JButton btn08 = new JButton();
-		btn08.setFocusable(false);
-		btn08.setBounds(556, 176, 40, 21);
-		add(btn08);
-		btn08.addActionListener(e -> {
-			btn08.setVisible(false);
-			motorLabels[7].setVisible(true);
-			parkSuccess("08");
-		});
+		parkingValidation(btn08, 556, 176, 40, 21, 7, "08");
 
 		JButton btn09 = new JButton();
-		btn09.setFocusable(false);
-		btn09.setBounds(556, 147, 40, 21);
-		add(btn09);
-		btn09.addActionListener(e -> {
-			btn09.setVisible(false);
-			motorLabels[8].setVisible(true);
-			parkSuccess("09");
-		});
+		parkingValidation(btn09, 556, 147, 40, 21, 8, "09");
 
 		JButton btn10 = new JButton();
-		btn10.setFocusable(false);
-		btn10.setBounds(556, 118, 40, 21);
-		add(btn10);
-		btn10.addActionListener(e -> {
-			btn10.setVisible(false);
-			motorLabels[9].setVisible(true);
-			parkSuccess("10");
-		});
+		parkingValidation(btn10, 556, 118, 40, 21, 9, "10");
 
 		JButton btn11 = new JButton();
-		btn11.setFocusable(false);
-		btn11.setBounds(556, 89, 40, 21);
-		add(btn11);
-		btn11.addActionListener(e -> {
-			btn11.setVisible(false);
-			motorLabels[10].setVisible(true);
-			parkSuccess("11");
-		});
+		parkingValidation(btn11, 556, 89, 40, 21, 10, "11");
 
 		JButton btn12 = new JButton();
-		btn12.setFocusable(false);
-		btn12.setBounds(556, 60, 40, 21);
-		add(btn12);
-		btn12.addActionListener(e -> {
-			btn12.setVisible(false);
-			motorLabels[11].setVisible(true);
-			parkSuccess("12");
-		});
+		parkingValidation(btn12, 556, 60, 40, 21, 11, "12");
 
 		JButton btn13 = new JButton();
-		btn13.setFocusable(false);
-		btn13.setBounds(556, 31, 40, 21);
-		add(btn13);
-		btn13.addActionListener(e -> {
-			btn13.setVisible(false);
-			motorLabels[12].setVisible(true);
-			parkSuccess("13");
-		});
+		parkingValidation(btn13, 556, 31, 40, 21, 12, "13");
 
 		JButton btn14 = new JButton();
-		btn14.setFocusable(false);
-		btn14.setBounds(602, 206, 40, 21);
-		add(btn14);
-		btn14.addActionListener(e -> {
-			btn14.setVisible(false);
-			motorLabels[13].setVisible(true);
-			parkSuccess("14");
-		});
+		parkingValidation(btn14, 602, 206, 40, 21, 13, "14");
 
 		JButton btn15 = new JButton();
-		btn15.setFocusable(false);
-		btn15.setBounds(602, 176, 40, 21);
-		add(btn15);
-		btn15.addActionListener(e -> {
-			btn15.setVisible(false);
-			motorLabels[14].setVisible(true);
-			parkSuccess("15");
-		});
+		parkingValidation(btn15, 602, 176, 40, 21, 14, "15");
 
 		JButton btn16 = new JButton();
-		btn16.setFocusable(false);
-		btn16.setBounds(602, 147, 40, 21);
-		add(btn16);
-		btn16.addActionListener(e -> {
-			btn16.setVisible(false);
-			motorLabels[15].setVisible(true);
-			parkSuccess("16");
-		});
+		parkingValidation(btn16, 602, 147, 40, 21, 15, "16");
 
 		JButton btn17 = new JButton();
-		btn17.setFocusable(false);
-		btn17.setBounds(602, 118, 40, 21);
-		add(btn17);
-		btn17.addActionListener(e -> {
-			btn17.setVisible(false);
-			motorLabels[16].setVisible(true);
-			parkSuccess("17");
-		});
+		parkingValidation(btn17, 602, 118, 40, 21, 16, "17");
 
 		JButton btn18 = new JButton();
-		btn18.setFocusable(false);
-		btn18.setBounds(602, 89, 40, 21);
-		add(btn18);
-		btn18.addActionListener(e -> {
-			btn18.setVisible(false);
-			motorLabels[17].setVisible(true);
-			parkSuccess("18");
-		});
+		parkingValidation(btn18, 602, 89, 40, 21, 17, "18");
 
 		JButton btn19 = new JButton();
-		btn19.setFocusable(false);
-		btn19.setBounds(602, 60, 40, 21);
-		add(btn19);
-		btn19.addActionListener(e -> {
-			btn19.setVisible(false);
-			motorLabels[18].setVisible(true);
-			parkSuccess("19");
-		});
+		parkingValidation(btn19, 602, 60, 40, 21, 18, "19");
 
 		JButton btn20 = new JButton();
-		btn20.setFocusable(false);
-		btn20.setBounds(602, 31, 40, 21);
-		add(btn20);
-		btn20.addActionListener(e -> {
-			btn20.setVisible(false);
-			motorLabels[19].setVisible(true);
-			parkSuccess("20");
-		});
+		parkingValidation(btn20, 602, 31, 40, 21, 19, "20");
 
 		JButton btn21 = new JButton();
-		btn21.setBounds(689, 33, 22, 38);
-		add(btn21);
-		motorLabels[20].setBounds(689, 33, 60, 20); 
-		add(motorLabels[20]);
-		btn21.addActionListener(e -> {
-			btn21.setVisible(false);
-			motorLabels[20].setVisible(true);
-			parkSuccess("21");
-		});
+		parkingValidation(btn21, 689, 33, 22, 38, 20, "21");
 
 		JButton btn22 = new JButton();
-		btn22.setBounds(721, 33, 22, 38);
-		add(btn22);
-		motorLabels[21].setBounds(721, 33, 60, 20);
-		add(motorLabels[21]);
-		btn22.addActionListener(e -> {
-			btn22.setVisible(false);
-			motorLabels[21].setVisible(true);
-			parkSuccess("22");
-		});
+		parkingValidation(btn22, 721, 33, 22, 38, 21, "22");
 
 		JButton btn23 = new JButton();
-		btn23.setBounds(753, 33, 22, 38);
-		add(btn23);
-		motorLabels[22].setBounds(753, 33, 60, 20);
-		add(motorLabels[22]);
-		btn23.addActionListener(e -> {
-			btn23.setVisible(false);
-			motorLabels[22].setVisible(true);
-			parkSuccess("23");
-		});
+		parkingValidation(btn23, 753, 33, 22, 38, 22, "23");
 
 		JButton btn24 = new JButton();
-		btn24.setBounds(785, 33, 22, 38);
-		add(btn24);
-		motorLabels[23].setBounds(785, 33, 60, 20);
-		add(motorLabels[23]);
-		btn24.addActionListener(e -> {
-			btn24.setVisible(false);
-			motorLabels[23].setVisible(true);
-			parkSuccess("24");
-		});
+		parkingValidation(btn24, 785, 33, 22, 38, 23, "24");
 
 		JButton btn25 = new JButton();
-		btn25.setBounds(782, 177, 22, 38);
-		add(btn25);
-		motorLabels[24].setBounds(782, 177, 60, 20);
-		add(motorLabels[24]);
-		btn25.addActionListener(e -> {
-			btn25.setVisible(false);
-			motorLabels[24].setVisible(true);
-			parkSuccess("25");
-		});
+		parkingValidation(btn25, 782, 177, 22, 38, 24, "25");
 
 		JButton btn26 = new JButton();
-		btn26.setBounds(750, 177, 22, 38);
-		add(btn26);
-		motorLabels[25].setBounds(750, 177, 60, 20);
-		add(motorLabels[25]);
-		btn26.addActionListener(e -> {
-			btn26.setVisible(false);
-			motorLabels[25].setVisible(true);
-			parkSuccess("26");
-		});
+		parkingValidation(btn26, 750, 177, 22, 38, 25, "26");
 
 		JButton btn27 = new JButton();
-		btn27.setBounds(719, 177, 22, 38);
-		add(btn27);
-		motorLabels[26].setBounds(719, 177, 60, 20);
-		add(motorLabels[26]);
-		btn27.addActionListener(e -> {
-			btn27.setVisible(false);
-			motorLabels[26].setVisible(true);
-			parkSuccess("27");
-		});
+		parkingValidation(btn27, 719, 177, 22, 38, 26, "27");
 
 		JButton btn28 = new JButton();
-		btn28.setBounds(687, 177, 22, 38);
-		add(btn28);
-		motorLabels[27].setBounds(687, 177, 60, 20);
-		add(motorLabels[27]);
-		btn28.addActionListener(e -> {
-			btn28.setVisible(false);
-			motorLabels[27].setVisible(true);
-			parkSuccess("28");
-		});
+		parkingValidation(btn28, 687, 177, 22, 38, 27, "28");
 
 		JButton btn29 = new JButton();
-		btn29.setFocusable(false);
-		btn29.setBounds(453, 505, 40, 21);
-		add(btn29);
-		motorLabels[28].setBounds(453, 505, 60, 20);
-		add(motorLabels[28]);
-		btn29.addActionListener(e -> {
-			btn29.setVisible(false);
-			motorLabels[28].setVisible(true);
-			parkSuccess("29");
-		});
+		parkingValidation(btn29, 453, 505, 40, 21, 28, "29");
 
 		JButton btn30 = new JButton();
-		btn30.setFocusable(false);
-		btn30.setBounds(453, 476, 40, 21);
-		add(btn30);
-		motorLabels[29].setBounds(453, 476, 60, 20);
-		add(motorLabels[29]);
-		btn30.addActionListener(e -> {
-			btn30.setVisible(false);
-			motorLabels[29].setVisible(true);
-			parkSuccess("30");
-		});
+		parkingValidation(btn30, 453, 476, 40, 21, 29, "30");
 
 		JButton btn31 = new JButton();
-		btn31.setFocusable(false);
-		btn31.setBounds(453, 447, 40, 21);
-		add(btn31);
-		motorLabels[30].setBounds(453, 447, 60, 20);
-		add(motorLabels[30]);
-		btn31.addActionListener(e -> {
-			btn31.setVisible(false);
-			motorLabels[30].setVisible(true);
-			parkSuccess("31");
-		});
+		parkingValidation(btn31, 453, 447, 40, 21, 30, "31");
 
 		JButton btn32 = new JButton();
-		btn32.setFocusable(false);
-		btn32.setBounds(453, 416, 40, 21);
-		add(btn32);
-		motorLabels[31].setBounds(453, 416, 60, 20);
-		add(motorLabels[31]);
-		btn32.addActionListener(e -> {
-			btn32.setVisible(false);
-			motorLabels[31].setVisible(true);
-			parkSuccess("32");
-		});
+		parkingValidation(btn32, 453, 416, 40, 21, 31, "32");
 
 		JButton btn33 = new JButton();
-		btn33.setFocusable(false);
-		btn33.setBounds(453, 387, 40, 21);
-		add(btn33);
-		motorLabels[32].setBounds(453, 387, 60, 20);
-		add(motorLabels[32]);
-		btn33.addActionListener(e -> {
-			btn33.setVisible(false);
-			motorLabels[32].setVisible(true);
-			parkSuccess("33");
-		});
+		parkingValidation(btn33, 453, 387, 40, 21, 32, "33");
 
 		JButton btn34 = new JButton();
-		btn34.setFocusable(false);
-		btn34.setBounds(453, 358, 40, 21);
-		add(btn34);
-		motorLabels[33].setBounds(453, 358, 60, 20);
-		add(motorLabels[33]);
-		btn34.addActionListener(e -> {
-			btn34.setVisible(false);
-			motorLabels[33].setVisible(true);
-			parkSuccess("34");
-		});
+		parkingValidation(btn34, 453, 358, 40, 21, 33, "34");
 
 		JButton btn35 = new JButton();
-		btn35.setFocusable(false);
-		btn35.setBounds(548, 505, 40, 21);
-		add(btn35);
-		motorLabels[34].setBounds(548, 505, 60, 20);
-		add(motorLabels[34]);
-		btn35.addActionListener(e -> {
-			btn35.setVisible(false);
-			motorLabels[34].setVisible(true);
-			parkSuccess("35");
-		});
+		parkingValidation(btn35, 548, 505, 40, 21, 34, "35");
 
 		JButton btn36 = new JButton();
-		btn36.setFocusable(false);
-		btn36.setBounds(548, 476, 40, 21);
-		add(btn36);
-		motorLabels[35].setBounds(548, 476, 60, 20);
-		add(motorLabels[35]);
-		btn36.addActionListener(e -> {
-			btn36.setVisible(false);
-			motorLabels[35].setVisible(true);
-			parkSuccess("36");
-		});
+		parkingValidation(btn36, 548, 476, 40, 21, 35, "36");
 
 		JButton btn37 = new JButton();
-		btn37.setFocusable(false);
-		btn37.setBounds(548, 447, 40, 21);
-		add(btn37);
-		motorLabels[36].setBounds(548, 447, 60, 20);
-		add(motorLabels[36]);
-		btn37.addActionListener(e -> {
-			btn37.setVisible(false);
-			motorLabels[36].setVisible(true);
-			parkSuccess("37");
-		});
+		parkingValidation(btn37, 548, 447, 40, 21, 36, "37");
 
 		JButton btn38 = new JButton();
-		btn38.setFocusable(false);
-		btn38.setBounds(548, 418, 40, 21);
-		add(btn38);
-		motorLabels[37].setBounds(548, 418, 60, 20);
-		add(motorLabels[37]);
-		btn38.addActionListener(e -> {
-			btn38.setVisible(false);
-			motorLabels[37].setVisible(true);
-			parkSuccess("38");
-		});
+		parkingValidation(btn38, 548, 418, 40, 21, 37, "38");
 
 		JButton btn39 = new JButton();
-		btn39.setFocusable(false);
-		btn39.setBounds(548, 387, 40, 21);
-		add(btn39);
-		motorLabels[38].setBounds(548, 387, 60, 20);
-		add(motorLabels[38]);
-		btn39.addActionListener(e -> {
-			btn39.setVisible(false);
-			motorLabels[38].setVisible(true);
-			parkSuccess("39");
-		});
+		parkingValidation(btn39, 548, 387, 40, 21, 38, "39");
 
 		JButton btn40 = new JButton();
-		btn40.setFocusable(false);
-		btn40.setBounds(548, 358, 40, 21);
-		add(btn40);
-		motorLabels[39].setBounds(548, 358, 60, 20);
-		add(motorLabels[39]);
-		btn40.addActionListener(e -> {
-			btn40.setVisible(false);
-			motorLabels[39].setVisible(true);
-			parkSuccess("40");
-		});
+		parkingValidation(btn40, 548, 358, 40, 21, 39, "40");
 
 		JButton btn41 = new JButton();
-		btn41.setFocusable(false);
-		btn41.setBounds(595, 505, 40, 21);
-		add(btn41);
-		motorLabels[40].setBounds(595, 505, 60, 20);
-		add(motorLabels[40]);
-		btn41.addActionListener(e -> {
-			btn41.setVisible(false);
-			motorLabels[40].setVisible(true);
-			parkSuccess("41");
-		});
+		parkingValidation(btn41, 595, 505, 40, 21, 40, "41");
 
 		JButton btn42 = new JButton();
-		btn42.setFocusable(false);
-		btn42.setBounds(595, 476, 40, 21);
-		add(btn42);
-		motorLabels[41].setBounds(595, 476, 60, 20);
-		add(motorLabels[41]);
-		btn42.addActionListener(e -> {
-			btn42.setVisible(false);
-			motorLabels[41].setVisible(true);
-			parkSuccess("42");
-		});
+		parkingValidation(btn42, 595, 476, 40, 21, 41, "42");
 
 		JButton btn43 = new JButton();
-		btn43.setFocusable(false);
-		btn43.setBounds(595, 447, 40, 21);
-		add(btn43);
-		motorLabels[42].setBounds(595, 447, 60, 20);
-		add(motorLabels[42]);
-		btn43.addActionListener(e -> {
-			btn43.setVisible(false);
-			motorLabels[42].setVisible(true);
-			parkSuccess("43");
-		});
+		parkingValidation(btn43, 595, 447, 40, 21, 42, "43");
 
 		JButton btn44 = new JButton();
-		btn44.setFocusable(false);
-		btn44.setBounds(595, 418, 40, 21);
-		add(btn44);
-		motorLabels[43].setBounds(595, 418, 60, 20);
-		add(motorLabels[43]);
-		btn44.addActionListener(e -> {
-			btn44.setVisible(false);
-			motorLabels[43].setVisible(true);
-			parkSuccess("44");
-		});
+		parkingValidation(btn44, 595, 418, 40, 21, 43, "44");
 
 		JButton btn45 = new JButton();
-		btn45.setFocusable(false);
-		btn45.setBounds(595, 387, 40, 21);
-		add(btn45);
-		motorLabels[44].setBounds(595, 387, 60, 20);
-		add(motorLabels[44]);
-		btn45.addActionListener(e -> {
-			btn45.setVisible(false);
-			motorLabels[44].setVisible(true);
-			parkSuccess("45");
-		});
+		parkingValidation(btn45, 595, 387, 40, 21, 44, "45");
 
 		JButton btn46 = new JButton();
-		btn46.setFocusable(false);
-		btn46.setBounds(595, 358, 40, 21);
-		add(btn46);
-		motorLabels[45].setBounds(595, 358, 60, 20);
-		add(motorLabels[45]);
-		btn46.addActionListener(e -> {
-			btn46.setVisible(false);
-			motorLabels[45].setVisible(true);
-			parkSuccess("46");
-		});
+		parkingValidation(btn46, 595, 358, 40, 21, 45, "46");
 
 		JButton btn47 = new JButton();
-		btn47.setFocusable(false);
-		btn47.setBounds(697, 358, 40, 21);
-		add(btn47);
-		motorLabels[46].setBounds(697, 358, 60, 20);
-		add(motorLabels[46]);
-		btn47.addActionListener(e -> {
-			btn47.setVisible(false);
-			motorLabels[46].setVisible(true);
-			parkSuccess("47");
-		});
+		parkingValidation(btn47, 697, 358, 40, 21, 46, "47");
 
 		JButton btn48 = new JButton();
-		btn48.setFocusable(false);
-		btn48.setBounds(697, 387, 40, 21);
-		add(btn48);
-		motorLabels[47].setBounds(697, 387, 60, 20);
-		add(motorLabels[47]);
-		btn48.addActionListener(e -> {
-			btn48.setVisible(false);
-			motorLabels[47].setVisible(true);
-			parkSuccess("48");
-		});
+		parkingValidation(btn48, 697, 387, 40, 21, 47, "48");
 
 		JButton btn49 = new JButton();
-		btn49.setFocusable(false);
-		btn49.setBounds(697, 418, 40, 21);
-		add(btn49);
-		motorLabels[48].setBounds(697, 418, 60, 20);
-		add(motorLabels[48]);
-		btn49.addActionListener(e -> {
-			btn49.setVisible(false);
-			motorLabels[48].setVisible(true);
-			parkSuccess("49");
-		});
+		parkingValidation(btn49, 697, 418, 40, 21, 48, "49");
 
 		JButton btn50 = new JButton();
-		btn50.setFocusable(false);
-		btn50.setBounds(697, 447, 40, 21);
-		add(btn50);
-		motorLabels[49].setBounds(697, 447, 60, 20);
-		add(motorLabels[49]);
-		btn50.addActionListener(e -> {
-			btn50.setVisible(false);
-			motorLabels[49].setVisible(true);
-			parkSuccess("50");
-		});
+		parkingValidation(btn50, 697, 447, 40, 21, 49, "50");
 
 		JButton btn51 = new JButton();
-		btn51.setFocusable(false);
-		btn51.setBounds(697, 476, 40, 21);
-		add(btn51);
-		motorLabels[50].setBounds(697, 476, 60, 20);
-		add(motorLabels[50]);
-		btn51.addActionListener(e -> {
-			btn51.setVisible(false);
-			motorLabels[50].setVisible(true);
-			parkSuccess("51");
-		});
+		parkingValidation(btn51, 697, 476, 40, 21, 50, "51");
 
 		JButton btn52 = new JButton();
-		btn52.setFocusable(false);
-		btn52.setBounds(697, 505, 40, 21);
-		add(btn52);
-		motorLabels[51].setBounds(697, 505, 60, 20);
-		add(motorLabels[51]);
-		btn52.addActionListener(e -> {
-			btn52.setVisible(false);
-			motorLabels[51].setVisible(true);
-			parkSuccess("52");
-		});
+		parkingValidation(btn52, 697, 505, 40, 21, 51, "52");
 
 		JButton btn53 = new JButton();
-		btn53.setFocusable(false);
-		btn53.setBounds(744, 505, 40, 21);
-		add(btn53);
-		motorLabels[52].setBounds(744, 505, 60, 20);
-		add(motorLabels[52]);
-		btn53.addActionListener(e -> {
-			btn53.setVisible(false);
-			motorLabels[52].setVisible(true);
-			parkSuccess("53");
-		});
+		parkingValidation(btn53, 744, 505, 40, 21, 52, "53");
 
 		JButton btn54 = new JButton();
-		btn54.setFocusable(false);
-		btn54.setBounds(744, 476, 40, 21);
-		add(btn54);
-		motorLabels[53].setBounds(744, 476, 60, 20);
-		add(motorLabels[53]);
-		btn54.addActionListener(e -> {
-			btn54.setVisible(false);
-			motorLabels[53].setVisible(true);
-			parkSuccess("54");
-		});
+		parkingValidation(btn54, 744, 476, 40, 21, 53, "54");
 
 		JButton btn55 = new JButton();
-		btn55.setFocusable(false);
-		btn55.setBounds(744, 447, 40, 21);
-		add(btn55);
-		motorLabels[54].setBounds(744, 447, 60, 20);
-		add(motorLabels[54]);
-		btn55.addActionListener(e -> {
-			btn55.setVisible(false);
-			motorLabels[54].setVisible(true);
-			parkSuccess("55");
-		});
+		parkingValidation(btn55, 744, 447, 40, 21, 54, "55");
 
 		JButton btn56 = new JButton();
-		btn56.setFocusable(false);
-		btn56.setBounds(744, 418, 40, 21);
-		add(btn56);
-		motorLabels[55].setBounds(744, 418, 60, 20);
-		add(motorLabels[55]);
-		btn56.addActionListener(e -> {
-			btn56.setVisible(false);
-			motorLabels[55].setVisible(true);
-			parkSuccess("56");
-		});
+		parkingValidation(btn56, 744, 418, 40, 21, 55, "56");
 
 		JButton btn57 = new JButton();
-		btn57.setFocusable(false);
-		btn57.setBounds(744, 387, 40, 21);
-		add(btn57);
-		motorLabels[56].setBounds(744, 387, 60, 20);
-		add(motorLabels[56]);
-		btn57.addActionListener(e -> {
-			btn57.setVisible(false);
-			motorLabels[56].setVisible(true);
-			parkSuccess("57");
-		});
+		parkingValidation(btn57, 744, 387, 40, 21, 56, "57");
 
 		JButton btn58 = new JButton();
-		btn58.setFocusable(false);
-		btn58.setBounds(744, 358, 40, 21);
-		add(btn58);
-		motorLabels[57].setBounds(744, 358, 60, 20);
-		add(motorLabels[57]);
-		btn58.addActionListener(e -> {
-			btn58.setVisible(false);
-			motorLabels[57].setVisible(true);
-			parkSuccess("58");
-		});
+		parkingValidation(btn58, 744, 358, 40, 21, 57, "58");
 
 		JButton btn59 = new JButton();
-		btn59.setBounds(827, 488, 22, 38);
-		add(btn59);
-		motorLabels[58].setBounds(827, 488, 60, 20);
-		add(motorLabels[58]);
-		btn59.addActionListener(e -> {
-			btn59.setVisible(false);
-			motorLabels[58].setVisible(true);
-			parkSuccess("59");
-		});
+		parkingValidation(btn59, 827, 488, 22, 38, 58, "59");
 
 		JButton btn60 = new JButton();
-		btn60.setBounds(859, 488, 22, 38);
-		add(btn60);
-		motorLabels[59].setBounds(859, 488, 60, 20);
-		add(motorLabels[59]);
-		btn60.addActionListener(e -> {
-			btn60.setVisible(false);
-			motorLabels[59].setVisible(true);
-			parkSuccess("60");
-		});
+		parkingValidation(btn60, 859, 488, 22, 38, 59, "60");
 
 		JButton btn61 = new JButton();
-		btn61.setBounds(889, 488, 22, 38);
-		add(btn61);
-		motorLabels[60].setBounds(889, 488, 60, 20);
-		add(motorLabels[60]);
-		btn61.addActionListener(e -> {
-			btn61.setVisible(false);
-			motorLabels[60].setVisible(true);
-			parkSuccess("61");
-		});
+		parkingValidation(btn61, 889, 488, 22, 38, 60, "61");
 
 		JButton btn62 = new JButton();
-		btn62.setBounds(920, 488, 22, 38);
-		add(btn62);
-		motorLabels[61].setBounds(920, 488, 60, 20);
-		add(motorLabels[61]);
-		btn62.addActionListener(e -> {
-			btn62.setVisible(false);
-			motorLabels[61].setVisible(true);
-			parkSuccess("62");
-		});
+		parkingValidation(btn62, 920, 488, 22, 38, 61, "62");
 
 		JButton btn63 = new JButton();
-		btn63.setBounds(920, 370, 22, 38);
-		add(btn63);
-		motorLabels[62].setBounds(920, 370, 60, 20);
-		add(motorLabels[62]);
-		btn63.addActionListener(e -> {
-			btn63.setVisible(false);
-			motorLabels[62].setVisible(true);
-			parkSuccess("63");
-		});
+		parkingValidation(btn63, 920, 370, 22, 38, 62, "63");
 
 		JButton btn64 = new JButton();
-		btn64.setBounds(889, 370, 22, 38);
-		add(btn64);
-		motorLabels[63].setBounds(889, 370, 60, 20);
-		add(motorLabels[63]);
-		btn64.addActionListener(e -> {
-			btn64.setVisible(false);
-			motorLabels[63].setVisible(true);
-			parkSuccess("64");
-		});
+		parkingValidation(btn64, 889, 370, 22, 38, 63, "64");
 
 		JButton btn65 = new JButton();
-		btn65.setBounds(859, 370, 22, 38);
-		add(btn65);
-		motorLabels[64].setBounds(859, 370, 60, 20);
-		add(motorLabels[64]);
-		btn65.addActionListener(e -> {
-			btn65.setVisible(false);
-			motorLabels[64].setVisible(true);
-			parkSuccess("65");
-		});
+		parkingValidation(btn65, 859, 370, 22, 38, 64, "65");
 
 		JButton btn66 = new JButton();
-		btn66.setBounds(827, 370, 22, 38);
-		add(btn66);
-		motorLabels[65].setBounds(827, 370, 60, 20);
-		add(motorLabels[65]);
-		btn66.addActionListener(e -> {
-			btn66.setVisible(false);
-			motorLabels[65].setVisible(true);
-			parkSuccess("66");
-		});
+		parkingValidation(btn66, 827, 370, 22, 38, 65, "66");
 
 		JButton btn67 = new JButton();
-		btn67.setBounds(920, 214, 22, 38);
-		add(btn67);
-		motorLabels[66].setBounds(920, 214, 60, 20);
-		add(motorLabels[66]);
-		btn67.addActionListener(e -> {
-			btn67.setVisible(false);
-			motorLabels[66].setVisible(true);
-			parkSuccess("67");
-		});
+		parkingValidation(btn67, 920, 214, 22, 38, 66, "67");
 
 		JButton btn68 = new JButton();
-		btn68.setBounds(889, 214, 22, 38);
-		add(btn68);
-		motorLabels[67].setBounds(889, 214, 60, 20);
-		add(motorLabels[67]);
-		btn68.addActionListener(e -> {
-			btn68.setVisible(false);
-			motorLabels[67].setVisible(true);
-			parkSuccess("68");
-		});
+		parkingValidation(btn68, 889, 214, 22, 38, 67, "68");
 
 		JButton btn69 = new JButton();
-		btn69.setFocusable(false);
-		btn69.setBounds(403, 505, 40, 21);
-		add(btn69);
-		motorLabels[68].setBounds(403, 505, 60, 20);
-		add(motorLabels[68]);
-		btn69.addActionListener(e -> {
-			btn69.setVisible(false);
-			motorLabels[68].setVisible(true);
-			parkSuccess("69");
-		});
+		parkingValidation(btn69, 403, 505, 40, 21, 68, "69");
 
 		JButton btn70 = new JButton();
-		btn70.setFocusable(false);
-		btn70.setBounds(403, 476, 40, 21);
-		add(btn70);
-		motorLabels[69].setBounds(403, 476, 60, 20);
-		add(motorLabels[69]);
-		btn70.addActionListener(e -> {
-			btn70.setVisible(false);
-			motorLabels[69].setVisible(true);
-			parkSuccess("70");
-		});
-
+		parkingValidation(btn70, 403, 476, 40, 21, 69, "70");
+		
+		// Call parkingValidation for each button
 		JButton btn71 = new JButton();
-		btn71.setFocusable(false);
-		btn71.setBounds(403, 447, 40, 21);
-		add(btn71);
-		motorLabels[70].setBounds(403, 447, 60, 20);
-		add(motorLabels[70]);
-		btn71.addActionListener(e -> {
-			btn71.setVisible(false);
-			motorLabels[70].setVisible(true);
-			parkSuccess("71");
-		});
+		parkingValidation(btn71, 403, 447, 40, 21, 70, "71");
 
 		JButton btn72 = new JButton();
-		btn72.setFocusable(false);
-		btn72.setBounds(403, 416, 40, 21);
-		add(btn72);
-		motorLabels[71].setBounds(403, 416, 60, 20);
-		add(motorLabels[71]);
-		btn72.addActionListener(e -> {
-			btn72.setVisible(false);
-			motorLabels[71].setVisible(true);
-			parkSuccess("72");
-		});
+		parkingValidation(btn72, 403, 416, 40, 21, 71, "72");
 
 		JButton btn73 = new JButton();
-		btn73.setFocusable(false);
-		btn73.setBounds(403, 387, 40, 21);
-		add(btn73);
-		motorLabels[72].setBounds(403, 387, 60, 20);
-		add(motorLabels[72]);
-		btn73.addActionListener(e -> {
-			btn73.setVisible(false);
-			motorLabels[72].setVisible(true);
-			parkSuccess("73");
-		});
+		parkingValidation(btn73, 403, 387, 40, 21, 72, "73");
 
 		JButton btn74 = new JButton();
-		btn74.setFocusable(false);
-		btn74.setBounds(403, 358, 40, 21);
-		add(btn74);
-		motorLabels[73].setBounds(403, 358, 60, 20);
-		add(motorLabels[73]);
-		btn74.addActionListener(e -> {
-			btn74.setVisible(false);
-			motorLabels[73].setVisible(true);
-			parkSuccess("74");
-		});
+		parkingValidation(btn74, 403, 358, 40, 21, 73, "74");
 
 		JButton btn75 = new JButton();
-		btn75.setFocusable(false);
-		btn75.setBounds(318, 505, 40, 21);
-		add(btn75);
-		motorLabels[74].setBounds(318, 505, 60, 20);
-		add(motorLabels[74]);
-		btn75.addActionListener(e -> {
-			btn75.setVisible(false);
-			motorLabels[74].setVisible(true);
-			parkSuccess("75");
-		});
+		parkingValidation(btn75, 318, 505, 40, 21, 74, "75");
 
 		JButton btn76 = new JButton();
-		btn76.setFocusable(false);
-		btn76.setBounds(318, 476, 40, 21);
-		add(btn76);
-		motorLabels[75].setBounds(318, 476, 60, 20);
-		add(motorLabels[75]);
-		btn76.addActionListener(e -> {
-			btn76.setVisible(false);
-			motorLabels[75].setVisible(true);
-			parkSuccess("76");
-		});
+		parkingValidation(btn76, 318, 476, 40, 21, 75, "76");
 
 		JButton btn77 = new JButton();
-		btn77.setFocusable(false);
-		btn77.setBounds(318, 447, 40, 21);
-		add(btn77);
-		motorLabels[76].setBounds(318, 447, 60, 20);
-		add(motorLabels[76]);
-		btn77.addActionListener(e -> {
-			btn77.setVisible(false);
-			motorLabels[76].setVisible(true);
-			parkSuccess("77");
-		});
+		parkingValidation(btn77, 318, 447, 40, 21, 76, "77");
 
 		JButton btn78 = new JButton();
-		btn78.setFocusable(false);
-		btn78.setBounds(318, 416, 40, 21);
-		add(btn78);
-		motorLabels[77].setBounds(318, 416, 60, 20);
-		add(motorLabels[77]);
-		btn78.addActionListener(e -> {
-			btn78.setVisible(false);
-			motorLabels[77].setVisible(true);
-			parkSuccess("78");
-		});
+		parkingValidation(btn78, 318, 416, 40, 21, 77, "78");
 
 		JButton btn79 = new JButton();
-		btn79.setFocusable(false);
-		btn79.setBounds(318, 387, 40, 21);
-		add(btn79);
-		motorLabels[78].setBounds(318, 387, 60, 20);
-		add(motorLabels[78]);
-		btn79.addActionListener(e -> {
-			btn79.setVisible(false);
-			motorLabels[78].setVisible(true);
-			parkSuccess("79");
-		});
+		parkingValidation(btn79, 318, 387, 40, 21, 78, "79");
 
 		JButton btn80 = new JButton();
-		btn80.setFocusable(false);
-		btn80.setBounds(318, 358, 40, 21);
-		add(btn80);
-		motorLabels[79].setBounds(318, 358, 60, 20);
-		add(motorLabels[79]);
-		btn80.addActionListener(e -> {
-			btn80.setVisible(false);
-			motorLabels[79].setVisible(true);
-			parkSuccess("80");
-		});
+		parkingValidation(btn80, 318, 358, 40, 21, 79, "80");
 
 		JButton btn81 = new JButton();
-		btn81.setBounds(333, 31, 22, 64);
-		add(btn81);
-		motorLabels[80].setBounds(333, 31, 60, 20);
-		add(motorLabels[80]);
-		btn81.addActionListener(e -> {
-			btn81.setVisible(false);
-			motorLabels[80].setVisible(true);
-			parkSuccess("81");
-		});
+		parkingValidation(btn81, 333, 31, 22, 64, 80, "81");
 
 		JButton btn82 = new JButton();
-		btn82.setBounds(300, 31, 22, 64);
-		add(btn82);
-		motorLabels[81].setBounds(300, 31, 60, 20);
-		add(motorLabels[81]);
-		btn82.addActionListener(e -> {
-			btn82.setVisible(false);
-			motorLabels[81].setVisible(true);
-			parkSuccess("82");
-		});
+		parkingValidation(btn82, 300, 31, 22, 64, 81, "82");
 
 		JButton btn83 = new JButton();
-		btn83.setBounds(266, 31, 22, 64);
-		add(btn83);
-		motorLabels[82].setBounds(266, 31, 60, 20);
-		add(motorLabels[82]);
-		btn83.addActionListener(e -> {
-			btn83.setVisible(false);
-			motorLabels[82].setVisible(true);
-			parkSuccess("83");
-		});
+		parkingValidation(btn83, 266, 31, 22, 64, 82, "83");
 
 		JButton btn84 = new JButton();
-		btn84.setBounds(232, 358, 22, 69);
-		add(btn84);
-		motorLabels[83].setBounds(232, 358, 60, 20);
-		add(motorLabels[83]);
-		btn84.addActionListener(e -> {
-			btn84.setVisible(false);
-			motorLabels[83].setVisible(true);
-			parkSuccess("84");
-		});
+		parkingValidation(btn84, 232, 358, 22, 69, 83, "84");
 
 		JButton btn85 = new JButton();
-		btn85.setBounds(73, 72, 22, 96);
-		add(btn85);
-		motorLabels[84].setBounds(73, 72, 60, 20);
-		add(motorLabels[84]);
-		btn85.addActionListener(e -> {
-			btn85.setVisible(false);
-			motorLabels[84].setVisible(true);
-			parkSuccess("85");
-		});
+		parkingValidation(btn85, 73, 72, 22, 96, 84, "85");
 
 		JButton btn86 = new JButton();
-		btn86.setBounds(37, 72, 22, 96);
-		add(btn86);
-		motorLabels[85].setBounds(37, 72, 60, 20);
-		add(motorLabels[85]);
-		btn86.addActionListener(e -> {
-			btn86.setVisible(false);
-			motorLabels[85].setVisible(true);
-			parkSuccess("86");
-		});
+		parkingValidation(btn86, 37, 72, 22, 96, 85, "86");
 
 		JButton btn87 = new JButton();
-		btn87.setBounds(106, 401, 22, 96);
-		add(btn87);
-		motorLabels[86].setBounds(106, 401, 60, 20);
-		add(motorLabels[86]);
-		btn87.addActionListener(e -> {
-			btn87.setVisible(false);
-			motorLabels[86].setVisible(true);
-			parkSuccess("87");
-		});
+		parkingValidation(btn87, 106, 401, 22, 96, 86, "87");
 
 		JButton btn88 = new JButton();
-		btn88.setBounds(70, 401, 22, 96);
-		add(btn88);
-		motorLabels[87].setBounds(70, 401, 60, 20);
-		add(motorLabels[87]);
-		btn88.addActionListener(e -> {
-			btn88.setVisible(false);
-			motorLabels[87].setVisible(true);
-			parkSuccess("88");
-		});
+		parkingValidation(btn88, 70, 401, 22, 96, 87, "88");
 
 		JButton btn89 = new JButton();
-		btn89.setBounds(34, 401, 22, 96);
-		add(btn89);
-		motorLabels[88].setBounds(34, 401, 60, 20);
-		add(motorLabels[88]);
-		btn89.addActionListener(e -> {
-			btn89.setVisible(false);
-			motorLabels[88].setVisible(true);
-			parkSuccess("89");
-		});
+		parkingValidation(btn89, 34, 401, 22, 96, 88, "89");
 
 		JLabel lblLayout = new JLabel(scaledIcon);
 		lblLayout.setBounds(0, 0, 986, 563);
@@ -1265,6 +532,25 @@ public class CourtParkingLayout extends JPanel {
 		enableButtons(buttons);
 	}
 
+	private void parkingValidation(JButton button, int x, int y, int width, int height, int labelIndex, String slot) {
+	    button.setFocusable(false);
+	    button.setBounds(x, y, width, height);
+	    add(button);
+	    button.addActionListener(e -> {
+	        int choice = JOptionPane.showConfirmDialog(
+	            null,
+	            "Are you sure you want to park in slot " + slot + "?",
+	            "Notice!",
+	            JOptionPane.YES_NO_OPTION
+	        );
+	        if (choice == JOptionPane.YES_OPTION) {
+	            button.setVisible(false);
+	            motorLabels[labelIndex].setVisible(true);
+	            parkSuccess(slot);
+	        }
+	    });
+	}
+
 	private JLabel createMotorLabels(int x, int y) { // horizontal motor icon
 		Image originalImage = motorcycleIcon.getImage();
 		Image scaledImage = originalImage.getScaledInstance(40, 21, Image.SCALE_SMOOTH);
@@ -1308,7 +594,7 @@ public class CourtParkingLayout extends JPanel {
 
 		return label;
 	}
-
+	
 	private void enableButtons(JButton[] button) {
 		for (JButton btn : button) {
 			btn.setEnabled(status); 

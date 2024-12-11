@@ -56,6 +56,7 @@ public class MainPanel extends JPanel {
 	
 	boolean status;
 
+	@SuppressWarnings("unused")
 	public MainPanel(Main frame) {
 		this.main = frame;
 
