@@ -46,7 +46,7 @@ public class MainPanel extends JPanel {
 	private JTextField IDtextField;
 
 	JComboBox<String> comboBoxDate = new JComboBox<>();
-	JComboBox<String> comboBoxCategory = new JComboBox<String>();
+	JComboBox<String> comboBoxCategory = new JComboBox<>();
 
 	Date currentDate = new Date();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM-dd-yyyy");

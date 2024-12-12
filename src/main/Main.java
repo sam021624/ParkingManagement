@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -30,9 +33,9 @@ public class Main extends JFrame {
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
 
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		this.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				int response = JOptionPane.showConfirmDialog(
 					Main.this, 
 					"Are you sure you want to exit?", 

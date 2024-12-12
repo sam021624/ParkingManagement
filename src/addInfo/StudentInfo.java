@@ -64,7 +64,7 @@ public class StudentInfo extends JFrame {
 		lastnameTextField.setBounds(244, 59, 196, 30);
 		panel.add(lastnameTextField);
 
-		JLabel lblStudentNumber = new JLabel("Student Number");
+		JLabel lblStudentNumber = new JLabel("ID Number");
 		lblStudentNumber.setFont(new Font("Cambria Math", Font.PLAIN, 20));
 		lblStudentNumber.setBounds(22, 99, 202, 30);
 		panel.add(lblStudentNumber);
@@ -127,8 +127,8 @@ public class StudentInfo extends JFrame {
 		this.setVisible(true);
 	}
 
-	public int getStudentID() {
-		return Integer.parseInt(idTextField.getText());
+	public String getStudentID() {
+		return idTextField.getText();
 	}
 
 	public String getCategory() {

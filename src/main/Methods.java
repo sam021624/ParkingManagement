@@ -22,7 +22,7 @@ public class Methods {
 		frame.repaint();
 	}
 
-	public void registerInfo(int studentID, String category, String studentName, String studentLastName, String plateNumber) {
+	public void registerInfo(String ID, String category, String studentName, String studentLastName, String plateNumber) {
 		String url = "jdbc:mysql://localhost:3306/studentdatabase";
 
 		// STUDENT ID, FIRST NAME, LAST NAME, PLATE NUMBER
@@ -33,7 +33,7 @@ public class Methods {
 			Connection con = DriverManager.getConnection(url, username, password);
 
 			PreparedStatement pst = con.prepareStatement(sql);
-			pst.setInt(1, studentID);
+			pst.setString(1, ID);
 			pst.setString(2, category);
 			pst.setString(3, studentName);
 			pst.setString(4, studentLastName);
