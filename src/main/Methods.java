@@ -23,7 +23,7 @@ public class Methods {
 	}
 
 	public void registerInfo(String ID, String category, String studentName, String studentLastName, String plateNumber) {
-		String url = "jdbc:mysql://localhost:3306/studentdatabase";
+		String url = "jdbc:mysql://localhost:3306/parkingmanagementdatabase";
 
 		// STUDENT ID, FIRST NAME, LAST NAME, PLATE NUMBER
 		String sql = "INSERT INTO studentInfo(student_id, category, first_name, last_name, plate_number) VALUES(?, ?, ?, ?, ?)";
@@ -56,7 +56,7 @@ public class Methods {
 	}
 
 	public void getInfoDatabase(String student_id, Main main) {
-		String url = "jdbc:mysql://localhost:3306/studentdatabase";
+		String url = "jdbc:mysql://localhost:3306/parkingmanagementdatabase";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

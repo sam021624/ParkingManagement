@@ -2,6 +2,7 @@ package login;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,13 +25,13 @@ import javax.swing.border.TitledBorder;
 
 import main.Methods;
 
-public class Login extends JFrame {
-	public LoadingAnimation animation = new LoadingAnimation(this);
+public class AdminLogin extends JFrame {
 	
 	Methods methods = new Methods();
 	
 	ImageIcon eyeIcon = new ImageIcon(getClass().getResource("/eye.png"));
 	ImageIcon eyehideIcon = new ImageIcon(getClass().getResource("/eyehide.png"));
+	ImageIcon adminIcon = new ImageIcon(getClass().getResource("/admin.png"));
 	
 	JPanel panel = new JPanel();
 	private JTextField textField;
@@ -38,8 +39,8 @@ public class Login extends JFrame {
 	
 	JCheckBox eyeLabel = new JCheckBox(eyehideIcon);
 
-	Login() {
-		panel.setBounds(0, 0, 984, 561);
+	AdminLogin() {
+		panel.setBounds(0, 0, 860, 362);
 		panel.setLayout(null);
 		panel.setBackground(Color.yellow);
 		getContentPane().add(panel);
@@ -49,7 +50,7 @@ public class Login extends JFrame {
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Login",
 				TitledBorder.CENTER, TitledBorder.TOP, new Font("Cambria Math", Font.BOLD, 30),
 				SystemColor.textHighlight));
-		panel_1.setBounds(281, 150, 475, 302);
+		panel_1.setBounds(357, 44, 475, 302);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -76,7 +77,7 @@ public class Login extends JFrame {
 		JButton loginButton = new JButton("Login");
 		loginButton.setFont(new Font("Consolas", Font.PLAIN, 15));
 		loginButton.setFocusable(false);
-		loginButton.setBounds(98, 220, 299, 40);
+		loginButton.setBounds(98, 220, 116, 40);
 		panel_1.add(loginButton);
 		loginButton.addActionListener(e -> {
 			if(!getUsername().isEmpty() || !getPassword().isEmpty()){
@@ -86,6 +87,15 @@ public class Login extends JFrame {
 		
 		eyeLabel.setBounds(407, 174, 29, 35);
 		panel_1.add(eyeLabel);
+		
+        ImageIcon icon = new ImageIcon(getClass().getResource("/admin.png")); // Load image
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(300, 200, Image.SCALE_SMOOTH); // Resize
+        icon = new ImageIcon(scaledImage);
+		
+		JLabel lblNewLabel = new JLabel(icon);
+		lblNewLabel.setBounds(32, 10, 315, 336);
+		panel.add(lblNewLabel);
 		eyeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -95,7 +105,7 @@ public class Login extends JFrame {
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 600);
+		this.setSize(874, 399);
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -121,8 +131,7 @@ public class Login extends JFrame {
 			
 			if(rs.next()) {
 				JOptionPane.showMessageDialog(null, "Login Success!");
-				methods.switchPanel(this, panel, animation);
-				animation.fillBar();
+				
 			}
 				
 			else
@@ -157,6 +166,6 @@ public class Login extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Login();
+		new AdminLogin();
 	}
 }
